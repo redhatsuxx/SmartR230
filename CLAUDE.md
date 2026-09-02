@@ -116,10 +116,35 @@ not a requirement.
   git-integrated auto-deploy (see "Deploy setup" below), replacing the
   manual zip-upload process.
 
-## Deploy setup (in progress, 2026-09-02)
+## Deploy setup (DONE, 2026-09-02)
 
-Moving from manual zip-upload to Cloudflare Pages' git integration
-(auto-deploys on push, no manual step). Plan: init a git repo here, push to
-a GitHub repo the operator creates, then connect that repo to Cloudflare
-Pages via the operator's dashboard (OAuth step only they can do). Waiting
-on: (1) git commit name/email to use, (2) the new GitHub repo's URL.
+Moved from manual zip-upload to git-based auto-deploy. Repo:
+https://github.com/redhatsuxx/SmartR230 (main branch). Commit identity:
+"SmartR230" / info@smartr230.co.uk.
+
+IMPORTANT - this deploys as a **Cloudflare Worker with static assets**
+(`npx wrangler deploy`, build log showed "Framework: Static", Worker name
+"smartr230"), NOT classic Cloudflare Pages, even though it was set up
+through the "Connect to Git" flow - Cloudflare's dashboard evidently routes
+new static-site git connections through Workers+assets now. This matters
+for anyone following Pages-specific instructions later: they won't match
+what's actually here. Custom domain is attached via Workers & Pages ->
+smartr230 (the Worker) -> Settings -> Domains & Routes -> Add Custom Domain,
+not a Pages "Custom domains" tab.
+
+`wrangler.jsonc` is committed (name: smartr230, assets.directory: ".") so
+the build doesn't have to re-auto-detect settings on every deploy.
+
+INCIDENT (2026-09-02, fixed same day): the first deploy uploaded the ENTIRE
+`.git` directory (full history, objects, config) and CLAUDE.md as public
+static assets, fetchable from the live URL - `wrangler deploy`'s asset
+scanner doesn't respect `.gitignore` and there was no `.assetsignore` yet.
+Confirmed nothing sensitive was ever committed (no API keys/credentials in
+that first commit - just HTML/CSS/images/favicon and this file's planning
+notes), so no secret leaked, but it's still bad practice and was fixed
+immediately: added `.assetsignore` (excludes `.git`, `.gitignore`,
+`.assetsignore` itself, `.wrangler`, `wrangler.jsonc`, `node_modules`,
+`CLAUDE.md`) and pushed. **Any future file added to this repo that
+shouldn't be publicly servable (secrets, internal notes, source maps, etc.)
+must be added to `.assetsignore` too - being in `.gitignore` alone does
+NOT stop wrangler from deploying it if it's already tracked.**
