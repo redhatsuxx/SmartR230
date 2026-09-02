@@ -91,6 +91,21 @@ p {
     border-left-color: #2ed573;
 }
 
+.problem-box h2, .solution-box h2 {
+    font-size: 20px;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 8px;
+}
+
+.problem-box h2 {
+    color: #e63946;
+}
+
+.solution-box h2 {
+    color: #2ed573;
+}
+
 .problem-box h3 {
     color: #e63946;
 }
