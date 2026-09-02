@@ -1,0 +1,13 @@
+# Excludes files from being uploaded/served as static assets by
+# `wrangler deploy` (Cloudflare Workers static-assets deployment).
+# Added 2026-09-02 after the first deploy uploaded the entire .git
+# directory and CLAUDE.md as publicly-fetchable static files - this file
+# is the fix. Same syntax as .gitignore.
+
+.git
+.gitignore
+.assetsignore
+.wrangler
+wrangler.jsonc
+node_modules
+CLAUDE.md
