@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-bottom: 3px solid #e63946;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 500px;
+    margin: 0 auto 30px;
+    display: block;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #e63946;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #b0b0b0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    border-bottom: 2px solid #e63946;
+    padding-bottom: 15px;
+}
+
+h3 {
+    font-size: 18px;
+    color: #e63946;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #d0d0d0;
+}
+
+.problem-solution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 25px 0;
+}
+
+.problem-box, .solution-box {
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #e63946;
+}
+
+.problem-box {
+    background: rgba(230, 57, 70, 0.1);
+}
+
+.solution-box {
+    background: rgba(46, 213, 115, 0.1);
+    border-left-color: #2ed573;
+}
+
+.problem-box h3 {
+    color: #e63946;
+}
+
+.solution-box h3 {
+    color: #2ed573;
+}
+
+.pricing {
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(230, 57, 70, 0.05));
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid #e63946;
+    margin: 30px 0;
+}
+
+.price {
+    font-size: 48px;
+    font-weight: bold;
+    color: #e63946;
+    margin: 15px 0;
+}
+
+.shipping {
+    font-size: 14px;
+    color: #a0a0a0;
+    margin-top: 15px;
+}
+
+.shipping-uk {
+    color: #2ed573;
+    font-weight: 600;
+}
+
+.contact-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.email-link {
+    display: inline-block;
+    font-size: 20px;
+    color: #e63946;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 15px 0;
+}
+
+.email-link:hover {
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(230, 57, 70, 0.2);
+    color: #e63946;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid #e63946;
+}
+
+.social-link:hover {
+    background: #e63946;
+    color: #fff;
+}
+
+.specs {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+.spec-item {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    font-weight: 600;
+    color: #e63946;
+    min-width: 120px;
+}
+
+.spec-value {
+    color: #d0d0d0;
+}
+
+/* Simple nav bar - added 2026-09-02 now that the site is growing beyond one page */
+nav {
+    background: #0a0a0a;
+    border-bottom: 1px solid #333;
+    padding: 14px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #d0d0d0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 16px;
+    transition: color 0.2s ease;
+}
+
+nav a:hover,
+nav a.active {
+    color: #e63946;
+}
+
+footer {
+    background: #0a0a0a;
+    border-top: 1px solid #333;
+    padding: 30px 20px;
+    text-align: center;
+    color: #808080;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+
+    .problem-solution {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .price {
+        font-size: 36px;
+    }
+
+    .social-links {
+        gap: 15px;
+    }
+
+    .social-link {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    header {
+        padding: 30px 20px;
+    }
+
+    .logo {
+        max-width: 350px;
+    }
+
+    nav a {
+        margin: 0 10px;
+        font-size: 13px;
+    }
+}
