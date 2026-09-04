@@ -9,24 +9,33 @@ for it to be copied back into the page.
 PAGE HEADER
 -----------
 Title: Install Instructions
-Subtitle: Fitting the SmartR230 emulator behind the rear SAM
+Subtitle: Fitting the SmartR230 emulator adjacent to the rear SAM
+located behind the seats
 
 
 OVERVIEW
 --------
 This guide is the written companion to our installation walkthrough
-video and covers fitting the SmartR230 emulator behind the rear SAM.
-It assumes the original BCM has already been removed as part of your
-replacement, leaving a spare connector at the CAN bus strip that
+video and covers fitting the SmartR230 emulator adjacent to the rear
+SAM. It assumes the original BCM has already been removed as part of
+your replacement, leaving a spare connector at the CAN bus strip that
 previously fed it.
 
 The install uses a fuse-tap method for power, so you don't need to cut
 into any of the car's original wiring. Everything is reversible.
 
+Where to put it
+  We recommend mounting the emulator inside the cubby space behind the
+  seats, adjacent to the rear fuse block, so the LED is visible
+  through the gap and the unit stays easy to reach if you ever need to
+  unplug it. The case has mounting lugs, which are handy if you're
+  fixing it to a flat panel - if you're tucking it into a tighter gap,
+  you can trim the lugs off and use a strip of Velcro instead.
+
   [callout - "Before you start"]
   Trim clips get brittle in cold weather, so this job is easier in
-  mild conditions. Work carefully around the airbag wiring loom near
-  the rear SAM, and avoid yanking on connectors.
+  mild conditions. Work carefully around the air lines and wiring loom
+  near the rear SAM, and avoid yanking on connectors.
 
 
 TOOLS REQUIRED
@@ -34,8 +43,8 @@ TOOLS REQUIRED
 - T15 Torx - Rear console and side panel screws
 - T20 Torx - Side panel and trim screws
 - 10mm socket or spanner - Earth connection
-- 4mm Allen key - Loosens the rear SAM housing bolts so the unit can
-  be moved
+- 4mm Allen key - Loosens compartment bolts so the unit can be moved
+  to access the rear SAM and fuse block
 
 
 PART 1: ACCESSING THE REAR SAM
@@ -43,7 +52,7 @@ PART 1: ACCESSING THE REAR SAM
 
 Step 1 - Rear center console
   1. Remove the two T15 screws inside the rear center console.
-  2. Lift the console section out.
+  2. Lift the centre rear console section out.
 
 Step 2 - Clear the way
   1. Slide the driver's seat fully forward.
@@ -51,50 +60,48 @@ Step 2 - Clear the way
      front has a hook that tucks under the carpet and can tear it if
      pulled from the wrong end.
 
-Step 3 - Side panel removal
+Step 3 - Metal side panel removal
   1. Remove four T15 screws: two together, plus one further round the
      side.
-  2. Pull the panel free and set it aside.
+  2. Pull the inner panel free and set it aside.
   3. Unclip the retaining clip that holds the next section down.
   4. Pop the trim piece out.
   5. Remove one T20 screw.
   6. Push the panel to release the remaining internal clips, then lift
      it up and out.
 
-Step 4 - You're at the rear SAM
+Step 4 - Loosen the rear SAM housing
+  1. Using the 4mm Allen key, loosen (not fully remove) the bolts
+     holding the compartment - just enough that the unit can move.
+  2. Remove the housing screws (T20 and T15) and lift the housing to
+     access the connectors underneath.
+  3. The unit lifts up and slides out of two slots at the back. Take
+     your time here - there's an air line loom attached, so don't pull
+     hard.
+
+Step 5 - You're at the rear SAM
   With that trim out, you have everything you need to install the
   emulator. For reference, the fuse module sits on top, the CAN
-  gateway (what the video refers to as "the canvas") is in the main
-  body of the unit, the roof module is underneath, and there are a
-  couple of sensors mounted nearby.
+  gateway is adjacent to the main body of the unit, the roof module is
+  underneath, and there are a couple of sensors mounted nearby.
 
 
 PART 2: WIRING THE EMULATOR
 ----------------------------
-The emulator has four connections: earth, permanent 12V, and the two
-CAN bus wires.
-
-Loosen the SAM housing
-  1. Using the 4mm Allen key, loosen (not fully remove) the bolts
-     holding the SAM housing - just enough that the unit can move.
-  2. Remove the housing screws (T20 and T15) and lift the housing to
-     access the connectors underneath.
-  3. The unit lifts up and slides out of two slots at the back. Take
-     your time here - there's an airbag-related loom attached, so
-     don't pull hard.
+The emulator has three connections: earth, permanent 12V, and the two
+CAN bus wires into a single dual DuPont connector.
 
 Earth
   Connect the emulator's black earth wire to a solid earth point using
-  the 10mm socket/spanner.
+  the 10mm socket/spanner. This point is located just inside the door,
+  now exposed since the trim has been removed.
 
 12V permanent live
-  1. Identify the permanent-live feed running into the rear SAM's fuse
-     box (green/white wire in the video, coming from the consumer
-     battery).
+  1. Identify the permanent-live feed running from the rear SAM's fuse
+     box (thick red/green wire from the purple fuse block).
   2. Fit the supplied fuse tap into that fuse position - this taps the
      circuit without altering the car's original wiring.
-  3. Connect the emulator's 12V (green/black) wire to the fuse tap.
-  4. The emulator has its own internal fuse (5A, supplied fitted) -
+  3. The emulator has its own internal fuse (500mA, supplied fitted) -
      you don't need to add separate fusing beyond the tap itself.
 
   Once earth and 12V are both connected, the emulator's LED will light
@@ -108,44 +115,31 @@ CAN High / CAN Low
      (bottom) at every position along that strip - red is CAN High,
      brown is CAN Low. Brown is NOT an earth - treat both as signal
      wires.
-  3. Use a DuPont pin connector on the emulator's CAN leads to plug
-     straight into that strip - no need to track down the original
-     Mercedes-specific connector.
-  4. Match polarity carefully: red to red (top), black/brown to brown
-     (bottom). Push firmly - the pins are a locking fit.
+  3. Use the DuPont pin connector on the emulator's CAN leads to plug
+     straight into that strip; any position on the strip is fine.
+  4. Important: red to red (top), black/brown to brown (bottom). Push
+     firmly.
 
   Once connected, the LED changes from solid to flashing - this means
-  the CAN bus is active and the emulator is receiving traffic.
+  the CAN bus is active and the emulator is receiving traffic. If it
+  doesn't, the car may be asleep; try waking it by opening and closing
+  a door. If the emulator is connected correctly, the light will
+  flash.
 
 
 PART 3: TESTING
 ----------------
   1. Insert the key and start the engine.
   2. Confirm there's no battery/BCM fault warning on the dash.
-  3. With the key out, watch the LED: it should keep flashing for a
-     while, then pause and restart as the car's electronics attempt to
-     go to sleep and get woken again by another module. This is normal
-     R230 behaviour and not caused by the emulator itself.
-
-  [callout - "A look ahead"]
-  Later firmware builds add the ability to identify which module is
-  keeping the car's CAN bus awake (useful for chasing parasitic
-  battery drain) and to host a small status web page from the
-  emulator itself. These features are still in active development.
+  3. With the key out, watch the LED: it should keep flashing for
+     circa 20 seconds, then go steady - this is an indication the car
+     has gone to sleep.
 
 
-PART 4: MOUNTING & REASSEMBLY
--------------------------------
+PART 4: REASSEMBLY
+-------------------
 
-Where to put it
-  We recommend mounting the emulator inside the cubby space you've
-  just opened up, so the LED is visible through the gap and the unit
-  stays easy to reach if you ever need to unplug it. The case has
-  mounting lugs, which are handy if you're fixing it to a flat panel -
-  if you're tucking it into a tighter gap, you can trim the lugs off
-  and use a strip of Velcro instead.
-
-Reassembly - reverse of Part 1
+Reverse of Part 1
   1. Refit the SAM housing and tighten the Allen bolts just enough to
      hold it - no need to overtighten.
   2. Refit the housing screws (T20/T15).
