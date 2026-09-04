@@ -1,0 +1,492 @@
+﻿0:02
+2 seconds
+back in the SL. So, I've been working on the emulator.
+0:07
+7 seconds
+What I wanted to try and do is I've been listening to the comments of people that have taken the emulator. Um, and I think for everybody that I've sent an emulator
+0:16
+16 seconds
+to, the emulator works and it works great. There's always been a bit of an issue with the installation um in that
+0:23
+23 seconds
+it hasn't been plugandplay. And I know some of the other options like SL guys and that uh the other one is more or less plug and play cuz they've made a 3D
+0:31
+31 seconds
+printed plug. Um I don't want to go down the 3D printed plug. I don't think it's needed. In my last video I said let's
+0:38
+38 seconds
+place it behind the driver's side seat in the UK. Um and let's put it by the rear SAM. Um and I actually think the
+0:47
+47 seconds
+rear SAM is a good place to put it for reasons I said in the last video, but I thought, well, how can I make it simpler to install? And I think I found a
+0:55
+55 seconds
+solution. So, this will be for the earth.
+0:59
+59 seconds
+This is going to be a tap to go in one of the fuses, which I'll show you. And this is going to plug straight into the
+1:08
+1 minute, 8 seconds
+canvas distributor. And all you need is a T20 Torx,
+1:15
+1 minute, 15 seconds
+a T15 Torx, and a 10 mil socket or spanner. So, the next thing we're going to run through is
+1:23
+1 minute, 23 seconds
+I'm going to show you the run through of actually getting to the rear SAM and taking apart all of the interior to get to it. And again, you only need these
+1:30
+1 minute, 30 seconds
+three tools to do it. Um, that's what's up next. Okay, I'm going to start at the center console.
+1:38
+1 minute, 38 seconds
+So, we want to be getting to the rear SAM.
+1:44
+1 minute, 44 seconds
+And I'm going to start in the rear center console because what we need to do is we need to get this off. And the way to get that off is in here.
+1:53
+1 minute, 53 seconds
+There's two screws and they are the T15. So, let's undo those two screws.
+2:00
+2 minutes
+Take them two screws out. I've had this out backwards and forwards quite a lot.
+2:05
+2 minutes, 5 seconds
+I'm going to do this specifically for this video. Take that out. I just taken that out. That enables you to lift this
+2:13
+2 minutes, 13 seconds
+up and get that get that out.
+2:19
+2 minutes, 19 seconds
+If you don't have that out, you won't be able to get this compartment out. Right. So, that was a T15.
+2:27
+2 minutes, 27 seconds
+That's the first thing to do. The next thing to do is we're going to take apart all of this and we're going to take out this bit so that we can get to it.
+2:37
+2 minutes, 37 seconds
+What I need to do is put the seat forward. So, let's put the seat forward.
+2:46
+2 minutes, 46 seconds
+Right. Let's take let's take up the seal. So that just lifts up. I always do it from the back cuz the front has actually got a hook that goes underneath the carpet. I don't want to damage it.
+2:56
+2 minutes, 56 seconds
+So that just pulls up and off. Then we're going to take these out out.
+3:03
+3 minutes, 3 seconds
+So this is a T15 again.
+3:07
+3 minutes, 7 seconds
+That I've got gravel gravel driveway. Losing screws in a gravel driver is a
+3:15
+3 minutes, 15 seconds
+nightmare. So, there's four screws on this. Those two screws there.
+3:21
+3 minutes, 21 seconds
+And come on. And then there's a screw around the side here.
+3:32
+3 minutes, 32 seconds
+Actually recently just redone this. I used a um a a glue obviously. I took that off and it
+3:41
+3 minutes, 41 seconds
+was a what do you call it where you put the glue on one side, put glue on the other, leave it half an hour and then stick it down. I forget the name. It
+3:48
+3 minutes, 48 seconds
+come to me. So that comes off and then we're going to pull this off. And that comes all the way out there. And then
+3:56
+3 minutes, 56 seconds
+this clip here, we need to take this clip off cuz this clip holds down this.
+4:01
+4 minutes, 1 second
+So let's take this clip off. Once that clips off, that's out. And then the next thing I need to do is actually just pop this out. Might be better to open it.
+4:14
+4 minutes, 14 seconds
+Let's pull that off. That just pulls off. And then this next one is a T20.
+4:23
+4 minutes, 23 seconds
+So let's undo this screw here. T20. So that pulls out out there.
+4:31
+4 minutes, 31 seconds
+And then what we want to do is want to push it that way to undo these clips, which is these clips in here. And there's another one there. You see, I've had it out before. And then this lifts up. Up. And it comes out.
+4:45
+4 minutes, 45 seconds
+Yeah. And that's out. There's a bit of foam that I put in there last time. Get rid of that. Get rid of that bit of foam. Okay. So, they're out.
+4:56
+4 minutes, 56 seconds
+Now, we can get to the rear SAM.
+4:59
+4 minutes, 59 seconds
+This is as much as you need to get to um to install the um device. So, um I'm going to cut and then come back.
+5:10
+5 minutes, 10 seconds
+Right. Now, we're back. Um I said you only needed three tools. You need one more, a 4mm Allen key. And that 4mm
+5:19
+5 minutes, 19 seconds
+Allen key allows you to open undo change hands. It allows you to undo these bolts here that are in there. You don't need
+5:28
+5 minutes, 28 seconds
+to undo them all the way. You just need to undo them loose enough so that this unit moves. You need to take out these screws.
+5:37
+5 minutes, 37 seconds
+I'll come back. I've lost my screwdriver. Here it is. You need to take out these screws. This is a T20.
+5:45
+5 minutes, 45 seconds
+Let's undo these one.
+5:52
+5 minutes, 52 seconds
+That T20. No, this 15.
+5:56
+5 minutes, 56 seconds
+Undo these. As you can see, the VIN number is there. That's where the VIN numbers stamped. Let's open this one up.
+6:07
+6 minutes, 7 seconds
+Let's open this one up. Right now, this is loose. So, them two bolts at the back there, they're loose. You can lift it up
+6:14
+6 minutes, 14 seconds
+and lift up a bit more. And it should just it says it slips out and it comes out.
+6:22
+6 minutes, 22 seconds
+And then you can see on the back there, there's two slots where it goes down.
+6:26
+6 minutes, 26 seconds
+Try and be careful with it because that's the airline and everything. Don't yank it out too much. And now we have the the rear SAM. Um, so actually what
+6:35
+6 minutes, 35 seconds
+you've got here, this is just a fuse module. Um, there's no electronic components in this. I've taken this all out. It's just a all these fuses. Then
+6:44
+6 minutes, 44 seconds
+in this box is just a big not printed circuit board, but a big matrix of
+6:50
+6 minutes, 50 seconds
+metals. don't know. Um, this is your um, this is your canvas as I said in the
+6:58
+6 minutes, 58 seconds
+last video. And then underneath there is also your roof module. So this here at the back here, this is your rear SAM.
+7:07
+7 minutes, 7 seconds
+Underneath there, that's your roof module. Uh, then in here, you've got this one here and this one here. These
+7:16
+7 minutes, 16 seconds
+are the your sensors. Uh, this might be another one. acceleration sensors, something like that. I can't remember.
+7:23
+7 minutes, 23 seconds
+Um, right. So, the main thing is, uh, these are the leads for my emulator.
+7:29
+7 minutes, 29 seconds
+Obviously, I've got connectors and all sorts on them cuz I keep taking it out and testing it and stuff.
+7:34
+7 minutes, 34 seconds
+Um, but my my preference would be you install the emulator in here. You could just sit it in here. You could find a space somewhere on here to stick it onto
+7:43
+7 minutes, 43 seconds
+it. I've stuck mine in here. Um, and it looks quite good in there because like I've said in the previous video, you can see through the hole and you can see what that red light's doing and then you
+7:51
+7 minutes, 51 seconds
+can get to it and you can pull it out and stuff. So, I advise you do that. And I've just put on some sticky stuff. So,
+7:58
+7 minutes, 58 seconds
+at the moment, I've tapped in to this wire for my positive. And this is what I want to try and get away from. I don't want people who buy my emulator
+8:06
+8 minutes, 6 seconds
+necessarily having to tap into this wire. Now, this wire is a permanent live. comes from the consumer battery
+8:13
+8 minutes, 13 seconds
+and it goes into the rear SAM into this fuse and that is this green and white here. So, what I'm going to do is I'm
+8:21
+8 minutes, 21 seconds
+going to use my fuse tap. I'm going to put this fuse in. So, everything stays the same electrically. I'm just tapping it. I'm going to use that ground point
+8:30
+8 minutes, 30 seconds
+and then my my connector. I'm going to use one of these pins. So, let's get the emulator and let's show you. Okay,
+8:39
+8 minutes, 39 seconds
+here's the emulator and we'll go back through the four pins again. So, the first one, simple black negative earth
+8:48
+8 minutes, 48 seconds
+point and that it's just gone out of shot. That simply bolt onto there nice and easy.
+8:56
+8 minutes, 56 seconds
+The 12 volts, like I said, this green and black, which is on this purple bank, and it's this left hand one. What we're
+9:03
+9 minutes, 3 seconds
+going to do is we're going to use these taps. Now I'll supply this tap and I'll supply this tap with this fuse in that position. That fuse in that position
+9:12
+9 minutes, 12 seconds
+allows power to pass from from that uh red and black
+9:19
+9 minutes, 19 seconds
+through this and into the emulator. Now the emulator does have its own fuse.
+9:23
+9 minutes, 23 seconds
+I've fused that down again. So in there there is another fuse and that takes it down to an amp fuse. This one's a 5 amp
+9:29
+9 minutes, 29 seconds
+fuse I supply with it. Um, now what you need to do is when you get it, you need to take out the fuse that's in there.
+9:39
+9 minutes, 39 seconds
+So, we'll take that fuse out if I can. Take that fuse out.
+9:45
+9 minutes, 45 seconds
+And then that fuse is going to go in the other side of this. And then that plug in there.
+9:55
+9 minutes, 55 seconds
+Now that is tapped to that. Okay.
+9:59
+9 minutes, 59 seconds
+as a 12vt live at the moment. Won't put it in. We'll take it out. Let's put the earth on. So, the earth is just out of
+10:09
+10 minutes, 9 seconds
+shot. Is just out shot. It's really difficult to film in the back of these yard. God knows what else it difficult
+10:16
+10 minutes, 16 seconds
+to do in the back of an R. Let's put undo that.
+10:22
+10 minutes, 22 seconds
+So, I'm just going to do this a little bit rough. When you do it, you can do it as neat as you like or as rough as you like. But I'm just going to put that on there.
+10:32
+10 minutes, 32 seconds
+This is an emulator actually that's about to be dispatched to
+10:40
+10 minutes, 40 seconds
+uh not sure which one. Either a nice chap in Bulgaria or a nice chap in Worcester. Um but when you get it, it
+10:49
+10 minutes, 49 seconds
+should be perfect. So that's the earth attached. Let's let's attach the um the 12vt. So, put the 12 volt on.
+11:00
+11 minutes
+12 volts on. See the emulator's got this red light. So, the red light means it's powered up. Um and it's just waiting for a CAN bus signal. So, again, we're going
+11:09
+11 minutes, 9 seconds
+to disconnect the power. So, I don't want to disconnect the CAN bus whilst it's like that. So, we'll take that out.
+11:13
+11 minutes, 13 seconds
+Now, the CAN bus, this strip, I've looked into this strip. What I've tried to do is actually try to see if I
+11:22
+11 minutes, 22 seconds
+can source these connectors. Now, I can buy these connectors secondhand. I cannot seem to find these connectors.
+11:27
+11 minutes, 27 seconds
+They are mad Mercedes bespoke. Can't seem to find them anywhere. And my intention was to find that exact one.
+11:35
+11 minutes, 35 seconds
+Put it on the end there and then you can plug it in. What I have found is actually the pins that are in there are actually what they call a I think it's a
+11:43
+11 minutes, 43 seconds
+DuPont pin. Someone correct me if I'm wrong. They're just two little pins. So I found a DuPont pin connector and it
+11:51
+11 minutes, 51 seconds
+just need to push it on. So you'll importantly you'll see that on here you've got the brown and red and underneath is just the brown. So that's
+11:59
+11 minutes, 59 seconds
+the same all the way along. They're all brown red at the top. So effectively you could say red at the top and brown at the bottom. Again the brown is not a
+12:07
+12 minutes, 7 seconds
+ground on the canvas. The brown is the can low and the red is the can high. It is not a ground. So, when I supply
+12:15
+12 minutes, 15 seconds
+these, I'm going to supply them with a Dupoint pin connector. Now, what you can do, you can use that or you could refer back to my last video, and if you wanted
+12:23
+12 minutes, 23 seconds
+to, you could find the one that goes to the original BCM, give it a snip, and then reuse the cable. I've left that in there. There's nothing connected to the
+12:31
+12 minutes, 31 seconds
+end of it at the moment. So, I can connect this in. Now, you need to make sure that what I've done, see if we can get a closeup. I've colored one side in
+12:39
+12 minutes, 39 seconds
+black and one side in red. And you need to make sure the red is at the top. So we'll put the red in at the top. Now it should just find the pins and it just
+12:48
+12 minutes, 48 seconds
+slot pushes in. And that's in. Now the main thing is that's in and it's in quite solid. These pins actually lock
+12:55
+12 minutes, 55 seconds
+in. My one is not going to lock in. But I can't see it going anywhere to be honest. Once it's in there, those Dupont pins are pretty good. So that's in
+13:04
+13 minutes, 4 seconds
+there. So now the canvas connected is is connection is done. The earth is connected. Let's give it some power.
+13:12
+13 minutes, 12 seconds
+Give it some power.
+13:16
+13 minutes, 16 seconds
+The light is on. Ah, and immediately you can see it's flashing. So, it's flashing because the canvas is running. So, let's
+13:24
+13 minutes, 24 seconds
+just go and get me keys and then we'll have a look at the dash. I'm going to leave it running. We'll speed up.
+13:32
+13 minutes, 32 seconds
+Okay.
+13:34
+13 minutes, 34 seconds
+So, there it is. It's in there. It's running. Let's put the keys in. We'll start the engine.
+13:42
+13 minutes, 42 seconds
+Engine started. And there's no no battery light, which is really, really good news. Um, so whoever's going to get
+13:50
+13 minutes, 50 seconds
+this one, I got a few more checks to do in it just to make sure it's good. But that is a working emulator and the install of it is now nice and simple.
+13:57
+13 minutes, 57 seconds
+So, if you follow those instructions, um, let's turn this off.
+14:03
+14 minutes, 3 seconds
+So, in putting it back together, all we've got to do again, we'll start and we'll do it all in the reverse order. What again, what I would say is
+14:11
+14 minutes, 11 seconds
+it's much easier working on these Mercedes in the warm weather. In the cold weather, everything just becomes brittle. Um, so
+14:20
+14 minutes, 20 seconds
+if there's any questions or if anyone's got any comments, um, please do let us know in the in the in the comments or go
+14:26
+14 minutes, 26 seconds
+to, uh, my Facebook group, Smartr R230, or go to, uh, or or you can go to my website, smartr230.co.uk
+14:35
+14 minutes, 35 seconds
+um, and email me there. In the next video, I've made some enhancements to the emulator. Um, so at the moment predominantly the emulator was and is
+14:43
+14 minutes, 43 seconds
+for just allowing you to install a different solution away from that BCM and get rid of that fault code. Um, the
+14:51
+14 minutes, 51 seconds
+emulator has got a lot more capability than that and I've started to develop that. So whoever's getting this one, um, and a couple of the ones I've sent out
+14:58
+14 minutes, 58 seconds
+before actually, but uh, the chaps that are getting this one and the other one, um, this is actually hosting a web page.
+15:05
+15 minutes, 5 seconds
+Um, so you can log into it and you can get an idea and a feel for the car that's happened, what's going on in the car, and that's going to be in my next video. Um, so I'm trying to make it more
+15:14
+15 minutes, 14 seconds
+than an emulator. What I want it to be is something that will give you an idea of what's going on in the car. Um, and I've got a lot of ideas for development
+15:22
+15 minutes, 22 seconds
+going forward in the future. Uh, let me know if you've got any ideas. One last thing, um, this is my one. This is the one I use for testing and I normally
+15:30
+15 minutes, 30 seconds
+have it under there. So, um, this I normally have it so that the LED is facing
+15:36
+15 minutes, 36 seconds
+facing this way. Now, I I I get it in there and it and it slots in and I sit it on there. Um, and that slots in quite
+15:45
+15 minutes, 45 seconds
+nicely. Um, but to do that with these boxes that I've bought on this one that I'm going to supply, obviously, you can
+15:54
+15 minutes, 54 seconds
+see it's got these lugs on it. These lugs are quite handy if you're going to fix it to the side of the walls or something. If you I don't know if you if you mount it in here, you can still use
+16:02
+16 minutes, 2 seconds
+a bit of Velcro. Probably don't need them lugs on it. You can put a couple of screws in. Um if you do want to fit it in there or you want to put Velcro on it
+16:10
+16 minutes, 10 seconds
+or something, do what I did and cut the lugs off. Um cuz if you don't cut the lugs off, I don't think it fits in this gap.
+16:20
+16 minutes, 20 seconds
+Um it does fit in that gap. It does fit in the gap, but it fits in the gap with everything out. Um, I think it's pretty awkward to try and get in that gap, but
+16:30
+16 minutes, 30 seconds
+that's up to you. Just quickly show you putting it back together. Um, I have just slotted this in. I'll show
+16:39
+16 minutes, 39 seconds
+you. I'll show I'll show you. Um, you might have to undo this screw here, that screw there. Give that a pull out and let that come forward to be able to get
+16:46
+16 minutes, 46 seconds
+that underneath and then slot it slot it down. So, that screw there, that screw there. Give this a little tug and that will come off. And then you should be
+16:54
+16 minutes, 54 seconds
+able to lift that up and then put them screws back down. And then it's a case of let's get the Allen key.
+17:03
+17 minutes, 3 seconds
+Allen key in that one. Tighten that one up just enough. Same with that one. Tighten that one up just enough.
+17:14
+17 minutes, 14 seconds
+There's the next. We put these screws in.
+17:22
+17 minutes, 22 seconds
+You see my emulator? It's blinking and then it's
+17:29
+17 minutes, 29 seconds
+it stops blinking for a second whilst I do this up. Let's do these up. So, it's blinking there. It
+17:37
+17 minutes, 37 seconds
+stopped and then it started again. And that means I haven't got the keys in the ignition at the moment, but that means that there is something in the car
+17:46
+17 minutes, 46 seconds
+that's keeping it awake. Now on the uh website of the emulator, what
+17:53
+17 minutes, 53 seconds
+I've been able to do is get the emulator to identify what was the last device or actually what was the last device that went to sleep and also what was the
+18:02
+18 minutes, 2 seconds
+first device that woke up. So which device is it that's keeping this car from sleeping? And it's really quite
+18:09
+18 minutes, 9 seconds
+important because when like I said before, when the car doesn't go to sleep, it continues to draw quite a lot of current from the from that consumer
+18:18
+18 minutes, 18 seconds
+battery. Um, but I'll go to that in more depth. Uh, it's still something I'm developing as well, but I'll do that more depth in the next video. You can
+18:25
+18 minutes, 25 seconds
+see it keeps trying to go to sleep and it keeps waking up. It's not the emulator. There's something in the car that's keeping it awake. So, let's close this and let's start putting this back together. Uh, where do I put the bits?
+18:37
+18 minutes, 37 seconds
+The next thing to go on is this side. Put that on.
+18:45
+18 minutes, 45 seconds
+Here is the side panel.
+18:48
+18 minutes, 48 seconds
+Now, the side panel, this one, whoever had the car before me, thank you very much, broke this little clip. And this little clip is supposed
+18:56
+18 minutes, 56 seconds
+to hook in to that there. So, you have to be generally fairly careful, but you need
+19:04
+19 minutes, 4 seconds
+to get that bit there. here. Slide that on. And then it just pushes in. And then the next thing, line these up. There's a hole in there.
+19:14
+19 minutes, 14 seconds
+And this one here. Line that up. Get this out of the way. Don't want that in the way. That's lined up. Give that a bash. Give that a bash.
+19:24
+19 minutes, 24 seconds
+Then the next thing is put this screw in.
+19:30
+19 minutes, 30 seconds
+And that again is the T20 Torx.
+19:37
+19 minutes, 37 seconds
+Um, I might need to do that later. And then that goes on. Then you can put that on
+19:45
+19 minutes, 45 seconds
+there. Put the two screws in. The other bit I wanted to show you really was this bit here. I think a lot of people get this wrong cuz when I got the car, this was all over the place. So this clip
+19:53
+19 minutes, 53 seconds
+here is quite important. This clip here holds on this part of the interior. So, make sure
+20:00
+20 minutes
+that you put that take this clip off and then put this clip on there and it holds that on. So, now that is connected. Then
+20:09
+20 minutes, 9 seconds
+you can put this back. That's all pretty straightforward. That back. You can put that plate back. That's all nice and straightforward.
+20:18
+20 minutes, 18 seconds
+That back on there. And then the other bit is this bit here. This bit here that I wanted to show quickly. Where have I put it? Put it here. There it is. Right.
+20:31
+20 minutes, 31 seconds
+Also, I think people get this bit wrong as well. So, on the bottom of here at the end, there is a little tab. And that
+20:38
+20 minutes, 38 seconds
+little tab needs to go up into that bit of carpet. Now, whoever's had this car before me, that used to be dead straight, and someone's broke it, which
+20:46
+20 minutes, 46 seconds
+is a bit annoying, which means it doesn't stay in. Um, these clips, I've had these out. I've made these a little bit tighter. What I've also done is I've
+20:54
+20 minutes, 54 seconds
+taken some gaffer tape, put it over these, and then the gaffer tape just creates a little bit more grip for those clips to hold onto. So, what you're supposed to
+21:02
+21 minutes, 2 seconds
+do is you're supposed to put that in at an angle, push it in like that, and then it sits in. And then that that clip
+21:11
+21 minutes, 11 seconds
+sits under that, and then you can wake it all in. You can see that that gaffer tape actually does a nice job of holding that in. Um, I'm going to sort out that
+21:20
+21 minutes, 20 seconds
+screw cuz it's not gone in. Put that back. Put them screws back uh and that back. And then that's it.
+21:27
+21 minutes, 27 seconds
+Uh end the video. See you in the next one.

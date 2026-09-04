@@ -216,6 +216,50 @@ p {
     color: #d0d0d0;
 }
 
+/* Ordered/unordered list styling for guide-style pages (install instructions, etc.) - added 2026-09-02 */
+main ol, main ul {
+    margin: 0 0 15px 22px;
+}
+
+main li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #d0d0d0;
+}
+
+main ol li::marker {
+    color: #e63946;
+    font-weight: 600;
+}
+
+.step-block {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #e63946;
+    border-radius: 8px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+}
+
+.step-block h3 {
+    margin-top: 0;
+}
+
+.step-block ol, .step-block ul {
+    margin-bottom: 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    color: #e63946;
+}
+
 /* Simple nav bar - added 2026-09-02 now that the site is growing beyond one page */
 nav {
     background: #0a0a0a;
