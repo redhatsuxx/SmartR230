@@ -1,7 +1,9 @@
 # SR230WEBSITE
 
-Public marketing/informational website for **SmartR230**, at **www.smartr230.co.uk**
-(already deployed and live). This project is the site's source and content —
+Public marketing/informational website for **SmartR230**, at
+**smartr230.co.uk** (already deployed and live - the apex domain; see
+"DNS note" under Deploy setup below, `www.` does NOT resolve). This project
+is the site's source and content —
 it is **separate from R230Logic/Mila** (the sibling `SmartR230/` folder, a
 Mercedes-Benz R230 CAN reverse-engineering environment and its C# WinForms
 tool). The two projects share a product name and a long-term business
@@ -126,12 +128,15 @@ buttons or a shipping-selection button rather than the current single form.
 (confirmed via a repo-wide grep before considering this done) and it carries
 `<meta name="robots" content="noindex, nofollow">`, per the operator's
 explicit request to review the live PayPal flow privately before going live.
-Since deploy is git auto-deploy (see "Deploy setup" below), pushing this
-file DOES make it publicly fetchable at the URL for anyone who has it - "no
-links" means undiscoverable via navigation/search, not access-controlled.
-**When ready to go live: add a nav link (and probably a "Buy Now" callout
-on the home page's Pricing section) pointing to `order.html`, and consider
-removing the noindex/nofollow meta tag at the same time.**
+Pushed to `main` 2026-09-07, so it IS live and publicly fetchable for anyone
+who has the URL (the git auto-deploy has no way to publish-but-restrict) -
+"no links" means undiscoverable via navigation/search, not access-controlled.
+Live at **https://smartr230.co.uk/order** (the working apex domain, and note
+Cloudflare's static-assets host redirects `/order.html` -> `/order`, so the
+extensionless URL is the canonical one - see "DNS note" below).
+**When ready to go live for real: add a nav link (and probably a "Buy Now"
+callout on the home page's Pricing section) pointing to `order.html`, and
+remove the noindex/nofollow meta tag at the same time.**
 
 ## Open questions (ask before building the rest of #3)
 
@@ -182,3 +187,15 @@ immediately: added `.assetsignore` (excludes `.git`, `.gitignore`,
 shouldn't be publicly servable (secrets, internal notes, source maps, etc.)
 must be added to `.assetsignore` too - being in `.gitignore` alone does
 NOT stop wrangler from deploying it if it's already tracked.**
+
+DNS NOTE (found 2026-09-07, not yet fixed): **`www.smartr230.co.uk` does not
+resolve at all** (NXDOMAIN) - only the apex `smartr230.co.uk` has DNS records
+and serves the site. This contradicts earlier notes/copy in this file
+referring to "www.smartr230.co.uk" as the live URL - those were wrong/stale,
+not a regression from anything built here. Use the apex domain in any
+future hardcoded URL (PayPal return/cancel URLs, meta tags, etc.) until the
+operator adds a `www` CNAME/record in Cloudflare DNS (or decides not to
+bother, since the apex works fine on its own). Separately, Cloudflare's
+Workers static-assets host 301/307-redirects `/<page>.html` to the
+extensionless `/<page>` - link to/from the extensionless path where
+possible to avoid the extra redirect hop.
