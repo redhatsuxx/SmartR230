@@ -23,22 +23,46 @@
             <h2>Order Summary</h2>
             <div class="pricing">
                 <p>SmartR230 BCM Emulator</p>
-                <div class="price">£88.50</div>
-                <p>UK delivery included</p>
+                <div class="price" id="totalPrice">£88.50</div>
+                <p>UK delivery included - one £3.50 shipping charge no matter how many you order (up to 5, one address)</p>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-top: 20px;">
                     <input type="hidden" name="cmd" value="_xclick">
                     <input type="hidden" name="business" value="payments@smartr230.co.uk">
-                    <input type="hidden" name="item_name" value="SmartR230 BCM Emulator (UK delivery, shipping included)">
+                    <input type="hidden" name="item_name" value="SmartR230 BCM Emulator">
                     <input type="hidden" name="item_number" value="SR230-UK-01">
-                    <input type="hidden" name="amount" value="88.50">
+                    <input type="hidden" name="amount" value="85.00">
+                    <input type="hidden" name="shipping" value="3.50">
+                    <input type="hidden" name="shipping2" value="0.00">
                     <input type="hidden" name="currency_code" value="GBP">
                     <input type="hidden" name="lc" value="GB">
                     <input type="hidden" name="cancel_return" value="https://smartr230.co.uk/order">
+
+                    <label for="qty" style="display: block; margin-bottom: 8px; font-weight: 600; color: #e63946;">Quantity</label>
+                    <select name="quantity" id="qty" onchange="updateTotal()" style="padding: 8px 14px; font-size: 16px; border-radius: 6px; border: 1px solid #e63946; background: #0a0a0a; color: #fff; margin-bottom: 20px;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <br>
                     <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Buy Now with PayPal">
                     <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
                 </form>
             </div>
         </section>
+
+        <script>
+            // Mirrors the PayPal side's own math (amount x quantity + a single
+            // flat shipping charge, via shipping2=0.00 so extra units don't add
+            // extra shipping) purely so the price shown here never disagrees
+            // with what PayPal will actually charge at checkout.
+            function updateTotal() {
+                var qty = parseInt(document.getElementById('qty').value, 10);
+                var total = (85 * qty + 3.50).toFixed(2);
+                document.getElementById('totalPrice').textContent = '£' + total;
+            }
+        </script>
 
         <section>
             <div class="contact-section">

@@ -113,8 +113,7 @@ no Resend integration yet - PayPal's own hosted checkout/receipt page is the
 entire flow for now, deliberately deferring the "further automation" scope
 from the original plan below.
 
-Deliberately **UK-only for now**: single fixed price £88.50 (£85 item + £3.50
-UK shipping bundled into one `amount`), because the operator has sold
+Deliberately **UK-only for now**: because the operator has sold
 internationally (US, Europe) at different actual shipping costs each time
 and there's no fixed international rate to hardcode into a button yet - the
 page's "Shipping outside the UK?" section keeps the same request-based flow
@@ -123,6 +122,26 @@ just pointed at a page instead of the general enquiry line. Revisit if/when
 the operator settles on fixed international shipping tiers (e.g. one flat
 EU rate, one flat US rate) - at that point this would become multiple
 buttons or a shipping-selection button rather than the current single form.
+
+QUANTITY (added 2026-09-07, up to 5): the operator confirmed UK shipping is
+a single flat £3.50 regardless of how many units go to the same address in
+one order, for 1-5 units (their real-world shipping cost doesn't scale with
+box count in that range). Rather than one fixed `amount` (which only worked
+for qty=1), the form now uses PayPal Website Payments Standard's native
+per-item pricing: `amount=85.00` (per unit) with a `<select name="quantity">`
+dropdown (1-5) that PayPal reads directly as the line-item multiplier, plus
+`shipping=3.50` (first-item shipping) and `shipping2=0.00` (shipping for
+each ADDITIONAL item) - so PayPal computes item total + one flat shipping
+charge no matter which quantity 1-5 is picked, without needing any
+per-quantity price logic on our side. A small inline `<script>` (`updateTotal()`,
+wired to the select's `onchange`) re-renders the on-page price display
+(`#totalPrice`) to match PayPal's own math live, purely so the number shown
+here never disagrees with what PayPal will actually charge at checkout -
+this does NOT feed back into the form submission itself, it's a display-only
+mirror of the same formula. Not yet tested against a real quantity>1
+transaction end-to-end - worth a real order or PayPal sandbox test before
+fully going live, since `shipping`/`shipping2` behavior was implemented from
+documented PayPal Website Payments Standard semantics, not verified live.
 
 **Deliberately UNLINKED** - no page on the live site links to `order.html`
 (confirmed via a repo-wide grep before considering this done) and it carries
