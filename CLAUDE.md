@@ -97,17 +97,51 @@ Cloudflare's git-integrated deployment (auto-deploys on push, no manual zip
 step) - worth raising with the operator as a possible convenience upgrade,
 not a requirement.
 
-## Open questions (ask before building #3)
+## PayPal Buy Now button (DONE - first cut, 2026-09-07)
 
-- PayPal integration is ON HOLD (2026-09-02): operator does not have a
-  PayPal Business account (required for webhooks/IPN and the Smart
-  Buttons/Checkout integration this needs) and does not want to set one up
-  unless it turns out to be genuinely necessary. Do not build any PayPal
-  code until this changes - focus on the simple/static work instead (install
-  page, nav, auto-deploy).
+Operator now has a PayPal Business account (the "on hold" note below is
+superseded for the simple button case - it still applies to the fuller
+webhook/automation build). Built `order.html`: a standalone order page
+using PayPal's classic hosted `_xclick` Buy Now button (form POSTs to
+`https://www.paypal.com/cgi-bin/webscr`, `business=payments@smartr230.co.uk`
+- see the payments@ mailbox set up 2026-09-07) rather than a PayPal-dashboard
+-generated Smart Button, specifically so it needed no PayPal-side button
+creation - just the business email. No webhook/IPN, no confirmation emails,
+no Resend integration yet - PayPal's own hosted checkout/receipt page is the
+entire flow for now, deliberately deferring the "further automation" scope
+from the original plan below.
+
+Deliberately **UK-only for now**: single fixed price £88.50 (£85 item + £3.50
+UK shipping bundled into one `amount`), because the operator has sold
+internationally (US, Europe) at different actual shipping costs each time
+and there's no fixed international rate to hardcode into a button yet - the
+page's "Shipping outside the UK?" section keeps the same request-based flow
+already on the home page (email `payments@smartr230.co.uk` for a quote),
+just pointed at a page instead of the general enquiry line. Revisit if/when
+the operator settles on fixed international shipping tiers (e.g. one flat
+EU rate, one flat US rate) - at that point this would become multiple
+buttons or a shipping-selection button rather than the current single form.
+
+**Deliberately UNLINKED** - no page on the live site links to `order.html`
+(confirmed via a repo-wide grep before considering this done) and it carries
+`<meta name="robots" content="noindex, nofollow">`, per the operator's
+explicit request to review the live PayPal flow privately before going live.
+Since deploy is git auto-deploy (see "Deploy setup" below), pushing this
+file DOES make it publicly fetchable at the URL for anyone who has it - "no
+links" means undiscoverable via navigation/search, not access-controlled.
+**When ready to go live: add a nav link (and probably a "Buy Now" callout
+on the home page's Pricing section) pointing to `order.html`, and consider
+removing the noindex/nofollow meta tag at the same time.**
+
+## Open questions (ask before building the rest of #3)
+
 - Transactional email: operator already has a **Resend** account - use that
-  when the email-sending piece is eventually built, no need to evaluate
-  alternatives.
+  when the fuller email-sending piece (order confirmation to buyer +
+  new-order notification to operator) is eventually built, no need to
+  evaluate alternatives. The Buy Now button above does NOT send either
+  email yet - PayPal's own receipt page is standing in for that.
+- Fixed international shipping tiers not yet defined (see above) - needed
+  before an international Buy Now option can be built the same way.
 - What exactly should "further automation" cover, if anything, beyond the
   two confirmation emails - fulfillment tracking, a license key, inventory/
   stock decrement, something else? Still open, not urgent while PayPal is on
