@@ -143,19 +143,38 @@ transaction end-to-end - worth a real order or PayPal sandbox test before
 fully going live, since `shipping`/`shipping2` behavior was implemented from
 documented PayPal Website Payments Standard semantics, not verified live.
 
-**Deliberately UNLINKED** - no page on the live site links to `order.html`
-(confirmed via a repo-wide grep before considering this done) and it carries
-`<meta name="robots" content="noindex, nofollow">`, per the operator's
-explicit request to review the live PayPal flow privately before going live.
-Pushed to `main` 2026-09-07, so it IS live and publicly fetchable for anyone
-who has the URL (the git auto-deploy has no way to publish-but-restrict) -
-"no links" means undiscoverable via navigation/search, not access-controlled.
-Live at **https://smartr230.co.uk/order** (the working apex domain, and note
-Cloudflare's static-assets host redirects `/order.html` -> `/order`, so the
-extensionless URL is the canonical one - see "DNS note" below).
-**When ready to go live for real: add a nav link (and probably a "Buy Now"
-callout on the home page's Pricing section) pointing to `order.html`, and
-remove the noindex/nofollow meta tag at the same time.**
+BUTTON STYLING (2026-09-07): the operator found PayPal's classic hosted
+button image (`btn_buynowCC_LG.gif`) looked unprofessional/dated, and
+separately supplied a code snippet from a DIFFERENT, newer PayPal button
+type (a hosted "Buy Now" link via `paypal.com/ncp/payment/<id>`, generated
+in their PayPal account's own button/payment-link tool). That newer type
+was evaluated and NOT adopted - it accepts no overridable form fields at
+all (price/quantity/shipping are configured against that button's ID
+entirely inside PayPal's dashboard), which is incompatible with the
+per-quantity pricing above being controlled from our own HTML. Operator
+chose to keep the self-hosted `_xclick` form and just restyle the trigger:
+replaced the `<input type="image">` GIF with a plain `<button>` styled by
+a new `.paypal-buy-btn` class in styles.css (solid `#e63946` fill, matching
+the site's existing accent/button treatment), labelled "PayPal Buy Now".
+
+LIVE ON THE HOME PAGE (2026-09-07): the whole order box (pricing, quantity
+selector, PayPal Buy Now button, international-shipping note) was merged
+into `index.html` itself, replacing its old static "Pricing & Shipping"
+section - retitled **"Order the SmartR230 BCM Emulator"**. This is the site
+going live for real with on-page purchasing; the "add a nav link when ready"
+step once planned here is now moot since the buy flow IS the pricing
+section, not a separate linked-to page.
+
+`order.html` still exists with the same content (now a duplicate, not the
+canonical buy flow) and is still unlinked + noindex/nofollow - it was never
+asked to be removed, so it's been left alone rather than deleted
+speculatively, but it's redundant now and worth operator input on whether
+to delete it, turn it into a redirect to `/`, or deliberately keep it as a
+direct shareable order link. **Whoever picks this up: don't silently let
+`order.html` and `index.html`'s order section drift out of sync - they
+currently have identical PayPal form fields/pricing logic by copy-paste,
+not by any shared include (this is a static site with no templating), so a
+future pricing/quantity change must be applied to BOTH files by hand.**
 
 ## Open questions (ask before building the rest of #3)
 
