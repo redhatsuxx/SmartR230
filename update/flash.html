@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SmartR230 Firmware Updater</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --panel: #141414;
+    --border: #2a2a2a;
+    --text: #e8e8e8;
+    --muted: #999;
+    --accent: #e63946;
+    --accent-hover: #ff4d5a;
+    --good: #2ed573;
+    --bad: #ff4d5a;
+    --warn: #ffb020;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .notice {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .notice strong { color: var(--text); }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  button:hover:not(:disabled) { background: var(--accent-hover); }
+
+  button:disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+  }
+
+  .progress-wrap {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 22px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--good));
+    transition: width 0.2s ease;
+  }
+
+  .log {
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    height: 320px;
+    overflow-y: auto;
+    font-family: "SF Mono", Consolas, Menlo, monospace;
+    font-size: 0.82rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .log-line { margin-bottom: 2px; }
+  .log-line.info { color: var(--text); }
+  .log-line.ok { color: var(--good); }
+  .log-line.err { color: var(--bad); }
+  .log-line.warn { color: var(--warn); }
+  .log-line.muted { color: var(--muted); }
+
+  footer {
+    margin-top: 24px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>SmartR230 Firmware Updater</h1>
+<div class="subtitle">Flash new firmware to your SmartR230 BCM emulator directly from the browser.</div>
+
+<div class="notice">
+  <strong>Before you start:</strong> this tool only works in <strong>Chrome or Edge</strong>
+  (desktop), served over <strong>HTTPS</strong>, using the Web Serial API. Other browsers
+  (Firefox, Safari) are not supported. Connect the device via USB before clicking Connect,
+  and do not unplug it or close this tab during flashing.
+</div>
+
+<div class="controls">
+  <button id="connectBtn">Connect ESP32</button>
+  <button id="flashBtn" disabled>Flash Firmware</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="log" id="log"></div>
+
+<footer>SmartR230 &mdash; internal firmware update utility.</footer>
+
+<script type="module" src="flash.js"></script>
+</body>
+</html>
