@@ -131,14 +131,18 @@
 <div class="subtitle">Flash new firmware to your SmartR230 BCM emulator directly from the browser.</div>
 
 <div class="notice">
-  <strong>Before you start:</strong> this tool only works in <strong>Chrome or Edge</strong>
-  (desktop), served over <strong>HTTPS</strong>, using the Web Serial API. Other browsers
-  (Firefox, Safari) are not supported. Connect the device via USB before clicking Connect,
-  and do not unplug it or close this tab during flashing.
+  <strong>Before you start:</strong>
+  <ol style="margin: 8px 0 0; padding-left: 20px;">
+    <li>Ensure the SmartR230 Emulator is disconnected from the car's 12V power.</li>
+    <li>This tool only works on a Windows computer (laptop or desktop). It will not work using a phone, iPad, etc.</li>
+    <li>It will only work in <strong>Chrome or Edge</strong>. Other browsers (Firefox, Safari) are not supported.</li>
+    <li>Connect the device via USB before clicking Connect, and do not unplug it or close this tab during flashing.</li>
+    <li>Once the upload has completed, it will be safe to unplug and re-install.</li>
+  </ol>
 </div>
 
 <div class="controls">
-  <button id="connectBtn">Connect ESP32</button>
+  <button id="connectBtn">Connect SmartR230</button>
   <button id="flashBtn" disabled>Flash Firmware</button>
 </div>
 
