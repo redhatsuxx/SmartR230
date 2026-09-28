@@ -215,6 +215,51 @@ redirect rather than the old hosted receipt page) is still standing in for
 that. `order.html` and `index.html` still have to be kept in sync by hand
 (no templating on this static site) - both were updated together here.
 
+## Added a second PayPal button for US orders (DONE, 2026-09-28)
+
+Same day as the JS SDK migration above. Operator wanted a fixed US rate
+($148, inc. shipping) alongside the existing UK button (£88.50), explicitly
+**US-only** - every other country (Canada, EU, Australia, etc.) still uses
+the "email payments@smartr230.co.uk for a quote" path, deliberately not
+relabelled as a general "international" rate, since actual shipping costs
+vary by destination and a flat US rate applied elsewhere would just get
+buyers the wrong price. Decision driven by wanting an unambiguous, low-
+confusion buyer experience over trying to cover more countries at once.
+
+Technical approach: PayPal's JS SDK ties one `<script src="...sdk/js?...">`
+load to one `currency` - you cannot mix currencies through a single loaded
+instance. Used PayPal's documented **multi-currency pattern**: two SDK
+`<script>` tags on the same page, each with its own `data-namespace`
+(`paypal_uk` / `paypal_us`) so they don't collide on the global `window.paypal`
+object, each with its own `currency` query param (GBP / USD) and its own
+`components=buttons`. Two `paypal_uk.Buttons(...)` / `paypal_us.Buttons(...)`
+instances render into two separate containers
+(`#paypal-button-container-uk` / `-us`), each with its own hardcoded
+fixed-price `createOrder` (`88.50 GBP` / `148.00 USD`) - same
+capture/thank-you/error pattern as before, sharing one `#paypal-status`
+line via a small `showPaypalStatus()` helper instead of two copies of the
+inline handler logic.
+
+Layout: `index.html`'s single `.pricing` box became a `.pricing-options`
+CSS grid holding two `.pricing` boxes side by side ("UK Orders" / "US
+Orders"), reusing the same visual style as the existing "Problem vs.
+Solution" two-column section (`.problem-solution`) for consistency -
+stacks to one column under 768px via the same media-query pattern.
+
+Added a one-line note under the US button that import/customs fees, if
+any, aren't included and are the buyer's responsibility - PayPal payments
+across borders are typically goods-value-only and buyers can otherwise be
+surprised by a customs bill on arrival.
+
+**Not verified:** operator's PayPal Business account receiving USD without
+issues (currency conversion on withdrawal, any account restrictions) -
+that's a PayPal account setting, not something checkable from this repo;
+worth the operator confirming directly with PayPal if not already done.
+
+If a third country/currency is ever wanted, follow the same pattern: a
+third namespaced SDK script + button pair, not a rebuild of the existing
+two.
+
 ## Open questions (ask before building the rest of #3)
 
 - Transactional email: operator already has a **Resend** account - use that

@@ -66,18 +66,32 @@
 
         <section>
             <h2>Order the SmartR230 BCM Emulator</h2>
-            <div class="pricing">
-                <p>SmartR230 BCM Emulator</p>
-                <div class="price">£88.50</div>
-                <p>UK delivery included. Need more than one, or shipping outside the UK? Email <a href="mailto:payments@smartr230.co.uk" style="color: #e63946;">payments@smartr230.co.uk</a> for a quote.</p>
-                <div id="paypal-button-container" style="max-width: 400px; margin: 20px auto 0;"></div>
-                <p id="paypal-status" style="text-align: center; margin-top: 12px;"></p>
+            <div class="pricing-options">
+                <div class="pricing">
+                    <p>UK Orders</p>
+                    <div class="price">£88.50</div>
+                    <p>UK delivery included.</p>
+                    <div id="paypal-button-container-uk" style="max-width: 320px; margin: 20px auto 0;"></div>
+                </div>
+                <div class="pricing">
+                    <p>US Orders</p>
+                    <div class="price">$148</div>
+                    <p>US delivery included. Import/customs fees, if any, are the buyer's responsibility.</p>
+                    <div id="paypal-button-container-us" style="max-width: 320px; margin: 20px auto 0;"></div>
+                </div>
             </div>
+            <p id="paypal-status" style="text-align: center; margin-top: 15px;"></p>
+            <p style="text-align: center; color: #a0a0a0; font-size: 14px; margin-top: 15px;">Ordering from somewhere else, or need more than one? Email <a href="mailto:payments@smartr230.co.uk" style="color: #e63946;">payments@smartr230.co.uk</a> for a quote.</p>
         </section>
 
-        <script src="https://www.paypal.com/sdk/js?client-id=AUqQTQHR-SC74EDiUo-5u-8uEJPA2cntlINUjssGm656-Z-J1zbxsZsF9Y-KrAgRG94C4dwB2uywr58W&currency=GBP"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=AUqQTQHR-SC74EDiUo-5u-8uEJPA2cntlINUjssGm656-Z-J1zbxsZsF9Y-KrAgRG94C4dwB2uywr58W&currency=GBP&components=buttons" data-namespace="paypal_uk"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=AUqQTQHR-SC74EDiUo-5u-8uEJPA2cntlINUjssGm656-Z-J1zbxsZsF9Y-KrAgRG94C4dwB2uywr58W&currency=USD&components=buttons" data-namespace="paypal_us"></script>
         <script>
-            paypal.Buttons({
+            function showPaypalStatus(msg) {
+                document.getElementById('paypal-status').textContent = msg;
+            }
+
+            paypal_uk.Buttons({
                 style: { color: 'gold', shape: 'rect', label: 'paypal' },
                 createOrder: function(data, actions) {
                     return actions.order.create({
@@ -89,16 +103,35 @@
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        document.getElementById('paypal-status').textContent =
-                            'Thanks, ' + details.payer.name.given_name + '! Payment received - a confirmation is on its way from PayPal.';
+                        showPaypalStatus('Thanks, ' + details.payer.name.given_name + '! Payment received - a confirmation is on its way from PayPal.');
                     });
                 },
                 onError: function(err) {
-                    document.getElementById('paypal-status').textContent =
-                        'Something went wrong with PayPal checkout. Please try again, or email payments@smartr230.co.uk.';
-                    console.error('PayPal Buttons error:', err);
+                    showPaypalStatus('Something went wrong with PayPal checkout. Please try again, or email payments@smartr230.co.uk.');
+                    console.error('PayPal Buttons error (UK):', err);
                 }
-            }).render('#paypal-button-container');
+            }).render('#paypal-button-container-uk');
+
+            paypal_us.Buttons({
+                style: { color: 'gold', shape: 'rect', label: 'paypal' },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: 'SmartR230 BCM Emulator (US delivery included)',
+                            amount: { value: '148.00', currency_code: 'USD' }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        showPaypalStatus('Thanks, ' + details.payer.name.given_name + '! Payment received - a confirmation is on its way from PayPal.');
+                    });
+                },
+                onError: function(err) {
+                    showPaypalStatus('Something went wrong with PayPal checkout. Please try again, or email payments@smartr230.co.uk.');
+                    console.error('PayPal Buttons error (US):', err);
+                }
+            }).render('#paypal-button-container-us');
         </script>
 
         <section>
