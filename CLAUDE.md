@@ -176,6 +176,49 @@ currently have identical PayPal form fields/pricing logic by copy-paste,
 not by any shared include (this is a static site with no templating), so a
 future pricing/quantity change must be applied to BOTH files by hand.**
 
+## PayPal migrated to JS SDK Smart Button (DONE, 2026-09-28)
+
+The classic `_xclick`/`cgi-bin/webscr` button (described above) started
+failing live in production with PayPal's generic "things don't appear to be
+working right now, please try again later" error. Cause: PayPal deprecated
+Website Payments Standard starting January 2026, with full shutdown expected
+January 2027 - the classic button type was simply no longer being accepted,
+not a bug in this site's code.
+
+Fix, in both `index.html` and `order.html`:
+- Removed the `<form action="https://www.paypal.com/cgi-bin/webscr">` block,
+  the quantity `<select>`, and the `updateTotal()` script entirely.
+- Replaced with PayPal's modern **JS SDK Smart Button**
+  (`paypal.com/sdk/js?client-id=...&currency=GBP`), rendering into a
+  `<div id="paypal-button-container">`. `createOrder` hardcodes a single
+  fixed-price purchase unit (`88.50 GBP` = £85 unit + £3.50 shipping),
+  `onApprove` captures the order and shows a plain thank-you message in
+  `#paypal-status`, `onError` shows a fallback message pointing to
+  `payments@smartr230.co.uk`.
+- Client ID is a **public** identifier (safe to embed in frontend JS/HTML,
+  unlike the Client Secret which must never appear client-side) - operator
+  retrieved it from developer.paypal.com -> Apps & Credentials -> Live.
+
+**Design decision (operator, 2026-09-28): dropped multi-unit ordering
+entirely** rather than rebuilding per-quantity pricing against the new
+button type (which - unlike the old `_xclick` form - doesn't take
+overridable amount/quantity fields the way this site's HTML previously
+drove them). Anyone wanting more than one unit, or international shipping,
+now uses the same existing "email payments@smartr230.co.uk for a quote"
+path on both pages. If per-quantity self-serve ordering is wanted again
+later, it would need to be built as multiple fixed-amount `createOrder`
+calls switched by a selector, or quantity multiplied into `amount.value`
+client-side before `actions.order.create()` - not evaluated/built here.
+
+Removed the now-unused `.paypal-buy-btn` CSS class from `styles.css` (was
+only used by the old `<button type="submit">` inside the removed form).
+
+**Still true from the old build, unchanged:** no webhook/IPN, no Resend
+confirmation emails - PayPal's own checkout flow (now the JS SDK popup/
+redirect rather than the old hosted receipt page) is still standing in for
+that. `order.html` and `index.html` still have to be kept in sync by hand
+(no templating on this static site) - both were updated together here.
+
 ## Open questions (ask before building the rest of #3)
 
 - Transactional email: operator already has a **Resend** account - use that
