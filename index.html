@@ -76,7 +76,7 @@
                 <div class="pricing">
                     <p>🇺🇸 USA Orders</p>
                     <div class="price">$148</div>
-                    <p>US delivery included. Import/customs fees, if any, are the buyer's responsibility.</p>
+                    <p>Delivery, customs and import fees all included.</p>
                     <div id="paypal-button-container-us" style="max-width: 320px; margin: 20px auto 0;"></div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
-                            description: 'SmartR230 BCM Emulator (US delivery included)',
+                            description: 'SmartR230 BCM Emulator (delivery, customs and import fees included)',
                             amount: { value: '148.00', currency_code: 'USD' }
                         }]
                     });

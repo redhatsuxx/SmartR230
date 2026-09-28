@@ -246,10 +246,17 @@ Orders"), reusing the same visual style as the existing "Problem vs.
 Solution" two-column section (`.problem-solution`) for consistency -
 stacks to one column under 768px via the same media-query pattern.
 
-Added a one-line note under the US button that import/customs fees, if
-any, aren't included and are the buyer's responsibility - PayPal payments
-across borders are typically goods-value-only and buyers can otherwise be
-surprised by a customs bill on arrival.
+**Correction (2026-09-28, same day):** originally added a note claiming
+import/customs fees were the buyer's responsibility and not included -
+this was wrong, an unconfirmed assumption on Claude's part rather than
+anything the operator said. Operator corrected it: the $148 US price is
+inclusive of delivery, customs, and import fees. Copy under the US button
+now reads "Delivery, customs and import fees all included." and the
+`createOrder` description string was updated to match. **Lesson for future
+edits here: don't add claims about what a price does/doesn't cover without
+explicit confirmation from the operator** - get it in writing from them
+first, this is exactly the kind of detail that causes real customer
+confusion/complaints if wrong.
 
 **Not verified:** operator's PayPal Business account receiving USD without
 issues (currency conversion on withdrawal, any account restrictions) -
