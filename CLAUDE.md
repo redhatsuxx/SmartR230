@@ -165,16 +165,12 @@ going live for real with on-page purchasing; the "add a nav link when ready"
 step once planned here is now moot since the buy flow IS the pricing
 section, not a separate linked-to page.
 
-`order.html` still exists with the same content (now a duplicate, not the
-canonical buy flow) and is still unlinked + noindex/nofollow - it was never
-asked to be removed, so it's been left alone rather than deleted
-speculatively, but it's redundant now and worth operator input on whether
-to delete it, turn it into a redirect to `/`, or deliberately keep it as a
-direct shareable order link. **Whoever picks this up: don't silently let
-`order.html` and `index.html`'s order section drift out of sync - they
-currently have identical PayPal form fields/pricing logic by copy-paste,
-not by any shared include (this is a static site with no templating), so a
-future pricing/quantity change must be applied to BOTH files by hand.**
+`order.html` existed as a duplicate of index.html's order section (not the
+canonical buy flow) for a while - now moot: **removed 2026-09-28**, same day
+as the PayPal migration below, at the operator's request, since it was
+redundant, unlinked, and would otherwise have needed the same PayPal fix
+applied a second time by hand (see the copy-paste sync-drift warning that
+used to be here). The order flow now lives only on `index.html`.
 
 ## PayPal migrated to JS SDK Smart Button (DONE, 2026-09-28)
 
