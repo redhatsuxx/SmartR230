@@ -310,6 +310,7 @@ nav {
     border-bottom: 1px solid #333;
     padding: 14px 20px;
     text-align: center;
+    position: relative;
 }
 
 nav a {
@@ -324,6 +325,29 @@ nav a {
 nav a:hover,
 nav a.active {
     color: #e63946;
+}
+
+/* YouTube / Facebook links pinned to the left of the top bar (added 2026-09-29).
+   The page links stay centred; on narrow screens the social links move onto
+   their own left-aligned row above them so nothing overlaps. */
+.nav-social {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+nav .nav-social a {
+    margin: 0 16px 0 0;
+}
+
+@media (max-width: 900px) {
+    .nav-social {
+        position: static;
+        transform: none;
+        text-align: left;
+        margin-bottom: 8px;
+    }
 }
 
 footer {
