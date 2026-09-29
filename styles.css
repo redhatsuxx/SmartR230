@@ -69,6 +69,20 @@ p {
     color: #d0d0d0;
 }
 
+/* Justified body text (added 2026-09-29). Hyphenation keeps the word gaps
+   even in the narrower two-column boxes. Centred boxes stay centred. */
+main p,
+main li {
+    text-align: justify;
+    hyphens: auto;
+}
+
+.pricing p,
+.contact-section p {
+    text-align: center;
+    hyphens: manual;
+}
+
 .problem-solution {
     display: grid;
     grid-template-columns: 1fr 1fr;
