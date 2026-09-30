@@ -123,12 +123,25 @@
     color: var(--muted);
     font-size: 0.78rem;
   }
+
+  .version-badge {
+    display: inline-block;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.82rem;
+    color: var(--good);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 </style>
 </head>
 <body>
 
 <h1>SmartR230 Firmware Updater</h1>
 <div class="subtitle">Flash new firmware to your SmartR230 BCM emulator directly from the browser.</div>
+<div class="version-badge">Available firmware: v<span id="firmwareVersion">-</span></div>
 
 <div class="notice">
   <strong>Before you start:</strong>

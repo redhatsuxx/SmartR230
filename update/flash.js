@@ -7,6 +7,7 @@ import { ESPLoader, Transport } from "https://cdn.jsdelivr.net/npm/esptool-js@0.
 // try to rewrite the image header - the merged binary already has the
 // correct values (dio / 80m / 4MB) baked in from the build.
 const FIRMWARE_URL = "firmware.bin";
+const FIRMWARE_VERSION = "5.1"; // bump this alongside update/firmware.bin so the badge never drifts from what's actually served
 const FLASH_ADDRESS = 0x0;
 const BAUD_RATE = 921600; // matches the Arduino IDE upload speed already proven to work with this board
 const EXPECTED_CHIP_SUBSTRING = "ESP32-C3";
@@ -16,6 +17,9 @@ const connectBtn = document.getElementById("connectBtn");
 const flashBtn = document.getElementById("flashBtn");
 const progressBar = document.getElementById("progressBar");
 const logEl = document.getElementById("log");
+const firmwareVersionEl = document.getElementById("firmwareVersion");
+
+if (firmwareVersionEl) firmwareVersionEl.textContent = FIRMWARE_VERSION;
 
 let transport = null;
 let esploader = null;
