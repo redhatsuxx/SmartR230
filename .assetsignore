@@ -16,3 +16,6 @@ referance
 # Local-only folders - never deploy (2026-10-03)
 Firmware
 Claude MD
+
+# Full-size source images - web versions live in assets (2026-10-03)
+Graphics
