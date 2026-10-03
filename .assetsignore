@@ -12,3 +12,7 @@ wrangler.jsonc
 node_modules
 CLAUDE.md
 referance
+
+# Local-only folders - never deploy (2026-10-03)
+Firmware
+Claude MD

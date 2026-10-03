@@ -328,3 +328,31 @@ bother, since the apex works fine on its own). Separately, Cloudflare's
 Workers static-assets host 301/307-redirects `/<page>.html` to the
 extensionless `/<page>` - link to/from the extensionless path where
 possible to avoid the extra redirect hop.
+
+## SEO (2026-10-03)
+
+Goal: maximise how easily the site is found. Target audience: owners of a
+Mercedes SL R230, and people looking to buy one. Plan agreed with the
+operator: (1) audit, (2) on-page basics, (3) Search Console, (4) content
+pages for real searches, (5) off-site signals (YouTube, Facebook group,
+R230/SL forums).
+
+Done (step 2, commit 8d0ba9c from a claude.ai session, merged 2026-10-03):
+titles/meta descriptions, canonical URLs, Open Graph tags, Product JSON-LD
+(GBP + USD offers), one `<h1>` per page (`h1.tagline`), image dimensions,
+extensionless links, `robots.txt`, `sitemap.xml`. Install guide is public.
+
+Rules for future edits:
+- Canonicals and sitemap use the apex domain, extensionless paths
+  (`https://smartr230.co.uk/install-instructions`).
+- Every new public page goes in `sitemap.xml` (update `lastmod`) and gets
+  its own title, meta description, canonical and OG tags.
+- Product availability is `https://schema.org/MadeToOrder` - the operator
+  sells to order. Don't change it to InStock.
+- Firmware Updater (`update/flash.html`) and the clock placeholder
+  (`clock-time.html`) are `noindex` and stay out of the sitemap. Don't block
+  them in `robots.txt` - Google must be able to crawl them to see noindex.
+- Price wording in meta/schema must match the on-page wording exactly (see
+  the pricing-claims lesson above).
+- `Firmware/` and `Claude MD/` are local-only: in both `.gitignore` and
+  `.assetsignore`.
