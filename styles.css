@@ -25,6 +25,7 @@ header {
 }
 
 .tagline {
+    margin-top: 0;
     font-size: 18px;
     color: #e63946;
     font-weight: 600;
