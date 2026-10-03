@@ -356,3 +356,4 @@ Rules for future edits:
   the pricing-claims lesson above).
 - `Firmware/` and `Claude MD/` are local-only: in both `.gitignore` and
   `.assetsignore`.
+- `robots.txt` keeps named AI crawlers out of `/update/` only (2026-10-03). Never add Googlebot/Bingbot to that group, and never `Disallow` `/update/` for `*` - Google must crawl it to see the noindex.
