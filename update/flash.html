@@ -31,6 +31,20 @@
     line-height: 1.5;
   }
 
+  .topnav {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+
+  .topnav a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .topnav a:hover { color: var(--accent-hover); }
+
   h1 {
     font-size: 1.4rem;
     margin-bottom: 4px;
@@ -138,6 +152,11 @@
 </style>
 </head>
 <body>
+
+<nav class="topnav">
+  <a href="/">&larr; Home</a>
+  <a href="/install-instructions">Install Guide</a>
+</nav>
 
 <h1>SmartR230 Firmware Updater</h1>
 <div class="subtitle">Flash new firmware to your SmartR230 BCM emulator directly from the browser.</div>
