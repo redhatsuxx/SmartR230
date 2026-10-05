@@ -267,6 +267,45 @@ If a third country/currency is ever wanted, follow the same pattern: a
 third namespaced SDK script + button pair, not a rebuild of the existing
 two.
 
+## INCIDENT: checkout used a Sandbox Client ID (found + fixed 2026-10-05)
+
+From 2026-09-28 to 2026-10-05 the PayPal buttons were wired to a **Sandbox**
+Client ID, not a Live one. Buttons rendered fine (which is why it looked
+like it worked), but every real payment - PayPal login or card - failed at
+the end, because real accounts/cards can't complete in sandbox. A customer
+reported "PayPal and Card fails every time". Evidence: the checkout popup
+URL was `www.sandbox.paypal.com/pay?...&env=sandbox` and PayPal showed
+"Cancel and return to Test Store" (sandbox default merchant name). No real
+money moved during that window, so no double-charge/refund issue, but no
+real sale could complete either.
+
+Root cause: the Client ID was copied from the developer dashboard while it
+was on the **Sandbox** tab (the dashboard defaults to Sandbox; the
+Sandbox | Live toggle is easy to miss). Sandbox and Live Client IDs look
+alike, so the string alone can't tell you which it is.
+
+Getting the Live ID was itself blocked for a while: the dashboard's Live
+toggle demanded "Verify your email address to switch to live mode" even
+though the account's email page showed the address as Primary with nothing
+to confirm; it cleared later and the Live app (name `SR230WEB`) was created
+under Apps & Credentials -> Live. Both SDK script tags in `index.html` now
+use that Live Client ID (public identifier, safe in client code - the
+Secret must never be committed; this repo is public).
+
+**How to tell which environment is live in future:** click a button and
+read the popup address bar - `www.paypal.com` = Live, `sandbox.paypal.com`
+(or `env=sandbox` in the URL) = Sandbox. Do a real small test payment
+after any Client ID change, ideally from a different PayPal account/card
+than the business account, then refund it.
+
+**Still not proven end-to-end with a completed real payment as of this
+entry** - the swap was verified by string replacement only. Also open:
+`onApprove` reads `details.payer.name.given_name` with no null-safety, and
+`onError` shows one generic message for every failure (declined card,
+capture refused, or a code error after a successful capture) - the real
+error only goes to the browser console. Hardening was proposed to the
+operator but not yet approved/built.
+
 ## Open questions (ask before building the rest of #3)
 
 - Transactional email: operator already has a **Resend** account - use that
