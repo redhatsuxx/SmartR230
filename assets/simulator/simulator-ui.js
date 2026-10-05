@@ -18,7 +18,7 @@
   const num = (el, v, unit, dp) => { el.innerHTML = v.toFixed(dp === undefined ? 1 : dp) + '<i>' + unit + '</i>'; };
   const signed = (v) => (v > 0.05 ? '+' : v < -0.05 ? '' : '') + v.toFixed(1);
 
-  let speed = 60, running = true, last = performance.now();
+  let speed = 10, running = true, last = performance.now();
   let lastLogN = -1, lastDtc = '';
 
   // Every path is drawn in one direction; `rev` flips the dash animation when current runs the other way.
@@ -260,7 +260,7 @@
   $('bStart').onclick = () => { act.start(); poke(); };
   $('bStop').onclick = () => { act.stop(); poke(); };
   $('bWake').onclick = () => { act.canWake(); poke(); };
-  $('bDemoStop').onclick = () => { stopDemo(); setSpeed(60); };
+  $('bDemoStop').onclick = () => { stopDemo(); setSpeed(10); };
   $('bClear').onclick = () => { act.clearDtc(); poke(); };
 
   $('bRun').onclick = () => { running = !running; $('bRun').textContent = running ? 'Pause' : 'Resume'; };
