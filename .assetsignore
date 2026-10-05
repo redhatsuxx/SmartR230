@@ -19,3 +19,6 @@ Claude MD
 
 # Full-size source images - web versions live in assets (2026-10-03)
 Graphics
+
+# Simulator source + handoff notes (contain private notes) - the deployed copy lives in simulator.html and assets/simulator (2026-10-05)
+WEBSIM
