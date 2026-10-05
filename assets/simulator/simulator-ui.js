@@ -19,6 +19,8 @@
   const signed = (v) => (v > 0.05 ? '+' : v < -0.05 ? '' : '') + v.toFixed(1);
 
   let speed = 10, running = true, last = performance.now();
+  // M1 (starter motor) display state: flashes red while cranking, then green while the engine runs. Display only; the model starts the engine instantly.
+  const CRANK_MS = 1500; let prevEng = false, crankUntil = 0;
   let lastLogN = -1, lastDtc = '';
 
   // Every path is drawn in one direction; `rev` flips the dash animation when current runs the other way.
@@ -106,6 +108,11 @@
     $('k75box').setAttribute('class', 'relay-box' + (S.k75 ? ' on' : ''));
     $('modBox').style.stroke = F.burnt ? 'var(--red)' : S.mod === 'STANDBY' ? '' : '#7a828e';
     $('dcBox').style.stroke = R.dcdc ? 'var(--green)' : '';
+    if (S.eng && !prevEng) crankUntil = performance.now() + CRANK_MS;
+    if (!S.eng && prevEng) crankUntil = 0;
+    prevEng = S.eng;
+    const cranking = performance.now() < crankUntil;
+    $('m1c').setAttribute('class', 'box' + (cranking ? ' m1-crank' : S.eng ? ' m1-run' : ''));
     $('svMode').textContent = modeShown;
     $('svTimer').textContent = timerText(S);
     $('svBurnt').textContent = F.burnt ? 'BCM BURNT BOARD' : '';
@@ -257,7 +264,7 @@
   /* ---- bindings ---- */
   $('bKeyIn').onclick = () => { act.keyIn(); poke(); };
   $('bKeyOut').onclick = () => { act.keyOut(); poke(); };
-  $('bStart').onclick = () => { act.start(); poke(); };
+  $('bStart').onclick = () => { crankUntil = performance.now() + CRANK_MS; act.start(); poke(); };
   $('bStop').onclick = () => { act.stop(); poke(); };
   $('bWake').onclick = () => { act.canWake(); poke(); };
   $('bDemoStop').onclick = () => { stopDemo(); setSpeed(10); };
