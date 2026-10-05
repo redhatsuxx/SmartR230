@@ -60,11 +60,11 @@ const Demos = (function () {
       ]
     },
     {
-      id: 'burnt', length: 30, title: 'Burnt N82/1 board',
+      id: 'burnt', length: 30, title: 'Burnt BCM N82/1 board',
       blurb: 'The module is dead. The starter battery never gets topped up until it is replaced.',
       setup() { Core.reset(null, { soc1: 0.6, soc4: 0.5, f: { burnt: true } }); },
       steps: [
-        { at: 0, speed: 60, fn: () => act.keyIn(), say: 'Burnt N82/1. Key in, but nothing answers on CAN-B and no relay can be commanded.' },
+        { at: 0, speed: 60, fn: () => act.keyIn(), say: 'Burnt BCM N82/1. Key in, but nothing answers on CAN-B and no relay can be commanded.' },
         { at: 3, fn: () => act.start(), say: 'The engine still starts on the batteries. The dash shows a workshop message.' },
         { at: 6, speed: 300, say: 'Running. The alternator charges G1, but the starter battery stays at 50% because the DC/DC converter is dead.' },
         { at: 16, fn: () => act.fault('burnt', false), say: 'A new module is fitted. N82/1 wakes up and the DC/DC converter starts charging the starter battery.' },

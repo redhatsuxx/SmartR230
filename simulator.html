@@ -23,7 +23,7 @@
   <a href="/">Home</a>
   <a href="/r230-battery-fault-visit-workshop">Battery Fault</a>
   <a href="/install-instructions">Install Guide</a>
-  <a href="/simulator" class="active" aria-current="page">Simulator</a>
+  <a href="/simulator" class="active" aria-current="page">BCM Simulator</a>
   <a href="/update/flash">Firmware Updater</a>
 </nav>
 
@@ -90,7 +90,7 @@
       <button data-sc="healthy">Healthy car</button>
       <button data-sc="weak">Weak G1</button>
       <button data-sc="alt">Dead alternator</button>
-      <button data-sc="burnt">Burnt N82/1</button>
+      <button data-sc="burnt">Burnt BCM N82/1</button>
       <button data-sc="f52f1">Blown F52f1</button>
     </div>
   </section>
@@ -294,7 +294,7 @@
   <section class="panel">
     <h2>Fault injection <em>combine freely</em></h2>
     <div class="faults" id="faults">
-      <label class="fault"><span>N82/1 burnt board<small>module dead: no relays, no DC/DC, no CAN-B</small></span><input type="checkbox" id="fBurnt"><i class="sw"></i></label>
+      <label class="fault"><span>BCM N82/1 burnt board<small>module dead: no relays, no DC/DC, no CAN-B</small></span><input type="checkbox" id="fBurnt"><i class="sw"></i></label>
       <label class="fault"><span>Systems battery weak<small>less capacity, high internal resistance</small></span><input type="checkbox" id="fBad"><i class="sw"></i></label>
       <label class="fault"><span>Alternator G2 failed<small>no output to either battery</small></span><input type="checkbox" id="fAlt"><i class="sw"></i></label>
       <label class="fault"><span>F52f1 blown (100 A)<small>starter battery cut off from N82/1 and K57</small></span><input type="checkbox" id="fF1"><i class="sw"></i></label>

@@ -278,7 +278,7 @@ const Core = (function () {
     fault(name, on) {
       if (F[name] === on) return;
       F[name] = on;
-      const lab = { burnt: 'N82/1 burnt board', bad: 'Weak systems battery', alt: 'Alternator failure', f1: 'F52f1 blown', f2: 'F52f2 blown', k57: 'K57 stuck open' }[name];
+      const lab = { burnt: 'BCM N82/1 burnt board', bad: 'Weak systems battery', alt: 'Alternator failure', f1: 'F52f1 blown', f2: 'F52f2 blown', k57: 'K57 stuck open' }[name];
       log('USER', lab + (on ? ' injected.' : ' removed.'));
       if (on && name === 'f1') addDtc('F1', 'Supply to K57 / K75 / N82/1 interrupted (F52f1)');
       if (on && name === 'f2') addDtc('F2', 'Alternator circuit interrupted (F52f2)');
@@ -293,9 +293,10 @@ const Core = (function () {
     const on = S.awake && (S.key || S.eng) && S.R && S.R.V30 > 6;
     if (!on) return { off: true, cat: 0, msg: '', sub: '' };
     if (F.k57) return { cat: 1, msg: 'GO TO GARAGE', sub: 'K57 faulty: no emergency supply' };                  // DOC message
-    if (F.burnt) return { cat: 1, msg: 'Visit workshop!', sub: 'N82/1 not answering on CAN-B' };              // MODEL trigger
+    if (F.burnt) return { cat: 1, msg: 'Visit workshop!', sub: 'BCM N82/1 not answering on CAN-B' };              // MODEL trigger
     if (F.f1 || ocv4(S.soc4) < 11.9) return { cat: 1, msg: 'Visit workshop!', sub: 'Starter battery failure (G1/4)' }; // DOC message, MODEL trigger
     if (S.emerg || S.prio) return { cat: 2, msg: 'Electric consumers offline!', sub: 'Systems battery low' };  // DOC
+    if (F.alt) return { cat: 1, msg: 'Visit workshop!', sub: 'Alternator G2 not charging' };                   // MODEL trigger
     return { cat: 0, msg: 'No messages', sub: '' };
   }
 

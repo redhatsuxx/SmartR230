@@ -108,7 +108,7 @@
     $('dcBox').style.stroke = R.dcdc ? 'var(--green)' : '';
     $('svMode').textContent = modeShown;
     $('svTimer').textContent = timerText(S);
-    $('svBurnt').textContent = F.burnt ? 'BURNT BOARD' : '';
+    $('svBurnt').textContent = F.burnt ? 'BCM BURNT BOARD' : '';
     $('sv4v').textContent = R.V4.toFixed(1) + ' V';
     $('sv4s').textContent = Math.round(S.soc4 * 100) + '%';
     $('sv1v').textContent = R.V30.toFixed(1) + ' V';
@@ -281,7 +281,7 @@
     const b = e.target.closest('button'); if (!b) return;
     stopDemo(); Core.reset(b.dataset.sc); syncInputs(); lastLogN = -1; lastDtc = '';
     Core.S.log.shift();
-    const names = { healthy: 'healthy car', weak: 'weak systems battery', alt: 'dead alternator', burnt: 'burnt N82/1', f52f1: 'blown F52f1 with a weak systems battery' };
+    const names = { healthy: 'healthy car', weak: 'weak systems battery', alt: 'dead alternator', burnt: 'burnt BCM N82/1', f52f1: 'blown F52f1 with a weak systems battery' };
     Core.S.log.unshift({ t: 0, src: 'USER', msg: 'Scenario loaded: ' + names[b.dataset.sc] + '. Insert the key to begin.' });
     Core.S.logN++;
     poke();
