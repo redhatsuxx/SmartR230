@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartR230 DC2DC Simulator | SmartR230</title>
+<meta name="description" content="Interactive simulator of an R230 dual-battery setup where the BCM is replaced by a DC2DC charger and a SmartR230. Run guided demos, inject faults and watch both batteries and the dash respond.">
+<link rel="canonical" href="https://smartr230.co.uk/dc2dc-simulator">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SmartR230">
+<meta property="og:title" content="SmartR230 DC2DC Simulator">
+<meta property="og:description" content="Try an R230 dual-battery setup with a DC2DC charger and a SmartR230 in your browser: run guided demos and inject faults.">
+<meta property="og:url" content="https://smartr230.co.uk/dc2dc-simulator">
+<meta property="og:image" content="https://smartr230.co.uk/assets/smartr230-logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/assets/favicon.ico">
+<link rel="preload" href="/assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/simulator/dc2dc.css">
+</head>
+<body>
+<nav class="site-nav" aria-label="Site">
+  <a href="/">Home</a>
+  <a href="/r230-battery-fault-visit-workshop">Battery Fault</a>
+  <a href="/install-instructions">Install Guide</a>
+  <a href="/simulator">BCM Simulator</a>
+  <a href="/dc2dc-simulator" class="active" aria-current="page">DC2DC Simulator</a>
+  <a href="/update/flash">Firmware Updater</a>
+</nav>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="brand">
+    <a class="logo-link" href="https://smartr230.co.uk/" aria-label="SmartR230 website">
+      <img class="logo" alt="SmartR230" src="/assets/smartr230-logo.png" width="789" height="256">
+    </a>
+    <a class="site" href="https://smartr230.co.uk/">www.SmartR230.co.uk</a>
+  </div>
+  <div class="ttl">
+    <h1>SmartR230 DC2DC Simulator</h1>
+    <p>A non-factory setup: the N82/1 is replaced by a DC2DC charger, with the SmartR230 on CAN-B</p>
+  </div>
+  <div class="chips" aria-live="polite">
+    <span class="chip" id="chipCar">CAR <b id="vCar">ASLEEP</b></span>
+    <span class="chip" id="chipOri">DC2DC <b id="vOri">WAITING</b></span>
+    <span class="chip" id="chipLed">LED <b id="vLed">STEADY</b></span>
+    <span class="chip">SIM TIME <b id="vClock">0d 00:00:00</b></span>
+  </div>
+</header>
+
+<div class="bench">
+
+<!-- LEFT: operate -->
+<aside class="col col-l">
+
+  <section class="panel">
+    <h2>Key and engine <em id="vKey">key out</em></h2>
+    <div class="row" style="margin-bottom:8px">
+      <button id="bKeyIn" class="go">Insert key</button>
+      <button id="bKeyOut">Remove key</button>
+    </div>
+    <div class="row" style="margin-bottom:8px">
+      <button id="bStart">Start engine</button>
+      <button id="bStop">Stop engine</button>
+    </div>
+    <button id="bWake" style="width:100%">Wake through CAN-B</button>
+    <p class="note" id="vNote">Inserting the key wakes the CAN-B bus.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Simulation</h2>
+    <div class="fld">
+      <span class="lab">Speed <output id="oSpeed">10×</output></span>
+      <div class="seg" id="segSpeed" role="group" aria-label="Simulation speed">
+        <button data-s="1" aria-pressed="false">1×</button>
+        <button data-s="10" aria-pressed="true">10×</button>
+        <button data-s="60" aria-pressed="false">60×</button>
+        <button data-s="300" aria-pressed="false">300×</button>
+        <button data-s="3600" aria-pressed="false">1 h/s</button>
+      </div>
+    </div>
+    <div class="row">
+      <button id="bRun">Pause</button>
+      <button id="bReset">Reset</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Quick setups <em>reset and load</em></h2>
+    <div class="row" id="scen">
+      <button data-sc="healthy">Healthy car</button>
+      <button data-sc="weak">Weak G1</button>
+      <button data-sc="flat">Flat G1</button>
+      <button data-sc="deadalt">Dead alternator</button>
+      <button data-sc="noemu">No emulator</button>
+      <button data-sc="wontsleep">Car won't sleep</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Manual controls <em>replace K57</em></h2>
+    <div class="faults">
+      <label class="fault"><span>Isolator switch<small>manual link of G1 and G1/4, 20 A fuse</small></span><input type="checkbox" id="mIso"><i class="sw"></i></label>
+      <label class="fault"><span>DC2DC remote LINK<small>fitted = DC2DC enabled</small></span><input type="checkbox" id="mLink" checked><i class="sw"></i></label>
+    </div>
+    <button id="bRev" style="width:100%;margin-top:8px">Emergency reverse charge</button>
+    <p class="note"><span class="tag t-vic">SPEC</span> 25 A from G1/4 into G1 for 15 minutes plus a 5 minute settle. Engine off only.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Loads <em>key in only</em></h2>
+    <div class="faults" id="loads">
+      <label class="fault"><span>Headlights<small>about 10 A</small></span><input type="checkbox" id="lHead"><i class="sw"></i></label>
+      <label class="fault"><span>Blower (AAC)<small>requested level below</small></span><input type="checkbox" id="lBlow"><i class="sw"></i></label>
+      <label class="fault"><span>Rear window defroster<small>about 25 A</small></span><input type="checkbox" id="lDef"><i class="sw"></i></label>
+      <label class="fault"><span>Seat heaters<small>about 18 A</small></span><input type="checkbox" id="lSeat"><i class="sw"></i></label>
+      <label class="fault"><span>Audio<small>about 4 A</small></span><input type="checkbox" id="lAud"><i class="sw"></i></label>
+    </div>
+    <div class="fld" style="margin-top:12px">
+      <label for="rBlow">Blower request <output id="oBlow">100%</output></label>
+      <input type="range" id="rBlow" min="20" max="100" step="5" value="100">
+    </div>
+    <div class="fld">
+      <label for="rExtra">Extra load on the bus <output id="oExtra">0 A</output></label>
+      <input type="range" id="rExtra" min="0" max="120" step="5" value="0">
+      <small><span class="tag t-model">MODEL</span> a test load. A very large one holds the bus under 14 V so the DC2DC charger cannot see the engine.</small>
+    </div>
+  </section>
+
+</aside>
+
+<!-- CENTRE: see -->
+<main class="col col-c">
+
+  <section class="panel hero" id="srPanel">
+    <h2>SmartR230 emulator <em id="vEmuState">listening</em></h2>
+    <div class="srgrid">
+      <div>
+        <div class="ledrow"><i class="ledbig" id="ledBig"></i><div><b id="ledTxt">LED</b><br><small id="ledSub" style="color:var(--dim)"></small></div></div>
+        <div class="fld">
+          <span class="lab">Emulator</span>
+          <div class="seg" id="segEmu" role="group" aria-label="SmartR230 fitted">
+            <button data-e="none" aria-pressed="false">Not fitted</button>
+            <button data-e="off" aria-pressed="false">Unplugged</button>
+            <button data-e="on" aria-pressed="true">Fitted</button>
+          </div>
+        </div>
+        <div class="stats" style="margin-bottom:10px">
+          <div class="stat"><small>Sleep in</small><b id="srSleep">5:00</b></div>
+          <div class="stat"><small>Wi-Fi off in</small><b id="srWifi">4:40</b></div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <button id="bJump">Jump to 25 s before sleep</button>
+          <button id="bReboot">Reboot device</button>
+        </div>
+        <p class="note" id="srWarn" hidden style="color:var(--amber)">Master signal absent but the bus is active: another module is keeping the car awake.</p>
+      </div>
+      <div>
+        <div class="fld"><span class="lab">Set the dash clock <output id="srSess">IDLE</output></span></div>
+        <div class="tri">
+          <div class="fld"><label for="csDd">Day</label><input type="number" id="csDd" min="1" max="31" value="1"></div>
+          <div class="fld"><label for="csHh">Hour</label><input type="number" id="csHh" min="0" max="23" value="0"></div>
+          <div class="fld"><label for="csMm">Minute</label><input type="number" id="csMm" min="0" max="59" value="0"></div>
+        </div>
+        <div class="row" style="margin-bottom:8px">
+          <button id="bPhone">Use phone time</button>
+          <button id="bSetClock" class="go">Set clock</button>
+        </div>
+        <div class="stat"><small>Last result</small><b id="srRes" style="font-size:14px">&mdash;</b></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="panel">
+    <h2>Instrument cluster (A1) <em id="vCl">display off</em></h2>
+    <div class="cluster">
+      <svg class="gg big" id="gSpd" viewBox="0 0 200 200" role="img" aria-label="Speedometer"></svg>
+      <div class="mfd c0 off" id="mfd" role="status">
+        <svg id="mfdIcon" viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><rect x="4" y="12" width="56" height="30"/><path d="M14 12V5h10v7M40 12V5h10v7M14 27h12M38 27h12M44 21v12"/></svg>
+        <div><div class="msg" id="mfdMsg">&nbsp;</div><span class="sub" id="mfdSub">&nbsp;</span></div>
+      </div>
+      <svg class="gg big" id="gRpm" viewBox="0 0 200 200" role="img" aria-label="Rev counter"></svg>
+      <div class="clk off" id="clk">
+        <small>CLOCK</small><b id="clkT">03:17</b><small id="clkD">day 1</small>
+        <span class="tog" role="group" aria-label="Clock format">
+          <button data-h="24" aria-pressed="true">24 h</button><button data-h="12" aria-pressed="false">12 h</button>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Power supply schematic <em>click a fuse, the switch or the LINK</em></h2>
+    <div class="schem">
+      <svg viewBox="0 0 880 560" role="img" aria-label="Schematic of the converted system: alternator G2, fuse F52f2, the bus with systems battery G1 and loads, a manual isolator switch with a 20 amp fuse, and the DC2DC charger charging the starter battery G1/4. The N82/1 area is shown removed. The SmartR230 sits on CAN-B.">
+        <!-- wires -->
+        <path class="w" id="wAlt1" d="M84 150H130"/>
+        <path class="w" id="wAlt2" d="M170 150H300"/>
+        <path class="w" id="wLoad" d="M300 150V60H380"/>
+        <path class="w" id="wG1" d="M300 150V300"/>
+        <path class="w" id="wIn1" d="M300 150H370"/>
+        <path class="w" id="wIn2" d="M410 150H460"/>
+        <path class="w" id="wOut1" d="M640 150H700"/>
+        <path class="w" id="wOut2" d="M740 150H800"/>
+        <path class="w" id="wB4" d="M800 150V300"/>
+        <path class="w" id="wM1" d="M800 150V102"/>
+        <path class="w" id="wLk1" d="M300 275H380"/>
+        <path class="w" id="wLk2" d="M430 275H500"/>
+        <path class="w" id="wLk3" d="M540 275H800"/>
+        <circle class="nd" cx="300" cy="150" r="4.5"/>
+        <circle class="nd" cx="300" cy="275" r="4.5"/>
+        <circle class="nd" cx="800" cy="150" r="4.5"/>
+        <circle class="nd" cx="800" cy="275" r="4.5"/>
+
+        <!-- G2 -->
+        <circle class="box" id="g2c" cx="60" cy="150" r="24"/>
+        <text x="60" y="154" text-anchor="middle" class="lab">G2</text>
+        <text x="60" y="196" text-anchor="middle" style="font-size:10px">ALTERNATOR</text>
+        <text x="60" y="212" text-anchor="middle" id="svG2">14.1 V</text>
+
+        <!-- loads -->
+        <rect class="box" x="380" y="35" width="120" height="50"/>
+        <text x="440" y="56" text-anchor="middle" class="lab">LOADS</text>
+        <text x="440" y="74" text-anchor="middle" id="svLoad">0.0 A</text>
+
+        <!-- DC2DC -->
+        <rect class="box" id="oriBox" x="460" y="95" width="180" height="140"/>
+        <text x="550" y="118" text-anchor="middle" class="lab">DC2DC 12/12-50A</text>
+        <text x="550" y="134" text-anchor="middle" style="font-size:9.5px">non-isolated DC2DC</text>
+        <text x="550" y="168" text-anchor="middle" class="big" id="svOri">WAITING</text>
+        <text x="550" y="188" text-anchor="middle" id="svOriT">&nbsp;</text>
+        <g class="toggle" id="linkTog" role="button" tabindex="0" aria-label="Remote LINK jumper. Activate to fit or remove it.">
+          <rect class="box" id="linkBox" x="475" y="202" width="150" height="22"/>
+          <text x="550" y="217" text-anchor="middle" id="svLink" style="font-size:10px">LINK jumper fitted</text>
+        </g>
+
+        <!-- G1 and G1/4 -->
+        <rect class="box" id="b1" x="265" y="300" width="70" height="80"/>
+        <text x="300" y="334" text-anchor="middle" class="big" id="sv1v">12.6 V</text>
+        <text x="300" y="354" text-anchor="middle" id="sv1s">80%</text>
+        <text x="300" y="402" text-anchor="middle" class="lab">G1 SYSTEMS</text>
+        <text x="300" y="418" text-anchor="middle" id="sv1c">AGM 70 Ah</text>
+
+        <circle class="box" cx="800" cy="80" r="22"/>
+        <text x="800" y="84" text-anchor="middle" class="lab">M1</text>
+        <rect class="box" id="b4" x="765" y="300" width="70" height="80"/>
+        <text x="800" y="334" text-anchor="middle" class="big" id="sv4v">12.6 V</text>
+        <text x="800" y="354" text-anchor="middle" id="sv4s">70%</text>
+        <text x="800" y="402" text-anchor="middle" class="lab">G1/4 STARTER</text>
+        <text x="800" y="418" text-anchor="middle" id="sv4c">lead-acid 35 Ah</text>
+
+        <!-- isolator switch -->
+        <g class="toggle" id="isoTog" role="button" tabindex="0" aria-label="Manual isolator switch. Activate to close or open it.">
+          <rect x="372" y="248" width="66" height="40" fill="transparent"/>
+          <circle class="nd" cx="380" cy="275" r="3.5"/>
+          <circle class="nd" cx="430" cy="275" r="3.5"/>
+          <line class="blade" id="isoBlade" x1="380" y1="275" x2="425" y2="253"/>
+        </g>
+        <text x="405" y="242" text-anchor="middle" class="lab">ISOLATOR</text>
+
+        <!-- fuses -->
+        <g class="fuse" id="fuseF2" role="button" tabindex="0" aria-label="Alternator fuse F52f2, 200 amp. Activate to blow or replace.">
+          <rect x="130" y="138" width="40" height="24"/><line class="gap" x1="150" y1="134" x2="150" y2="166"/>
+          <text x="150" y="124" text-anchor="middle" class="lab">F52f2 200 A</text>
+          <text x="150" y="182" text-anchor="middle" id="svF2">intact</text>
+        </g>
+        <g class="fuse" id="fuseIn" role="button" tabindex="0" aria-label="DC2DC input fuse, 60 amp. Activate to blow or replace.">
+          <rect x="370" y="138" width="40" height="24"/><line class="gap" x1="390" y1="134" x2="390" y2="166"/>
+          <text x="390" y="124" text-anchor="middle" class="lab">IN 60 A</text>
+          <text x="390" y="182" text-anchor="middle" id="svFin">intact</text>
+        </g>
+        <g class="fuse" id="fuseOut" role="button" tabindex="0" aria-label="DC2DC output fuse, 60 amp. Activate to blow or replace.">
+          <rect x="700" y="138" width="40" height="24"/><line class="gap" x1="720" y1="134" x2="720" y2="166"/>
+          <text x="720" y="124" text-anchor="middle" class="lab">OUT 60 A</text>
+          <text x="720" y="182" text-anchor="middle" id="svFout">intact</text>
+        </g>
+        <g class="fuse" id="fuseLink" role="button" tabindex="0" aria-label="Isolator link fuse, 20 amp. Activate to blow or replace.">
+          <rect x="500" y="263" width="40" height="24"/><line class="gap" x1="520" y1="259" x2="520" y2="291"/>
+          <text x="520" y="250" text-anchor="middle" class="lab">LINK 20 A</text>
+          <text x="520" y="308" text-anchor="middle" id="svFlk">intact</text>
+        </g>
+
+        <!-- removed N82/1 -->
+        <g class="gh">
+          <rect class="box" x="400" y="340" width="330" height="108" style="fill:none"/>
+          <text x="565" y="362" text-anchor="middle" class="lab">N82/1 REMOVED</text>
+          <rect class="relay-box" x="425" y="378" width="120" height="48"/>
+          <text x="485" y="398" text-anchor="middle" class="lab">K57</text>
+          <text x="485" y="414" text-anchor="middle" style="font-size:9.5px">open, unwired</text>
+          <rect class="relay-box" x="585" y="378" width="120" height="48"/>
+          <text x="645" y="398" text-anchor="middle" class="lab">K75</text>
+          <text x="645" y="414" text-anchor="middle" style="font-size:9.5px">closed, unwired</text>
+        </g>
+
+        <!-- SmartR230 -->
+        <path class="w" id="wCan" d="M240 510H835" stroke-dasharray="3 5"/>
+        <rect class="box" id="srBox" x="40" y="480" width="200" height="60"/>
+        <text x="140" y="502" text-anchor="middle" class="lab">SMARTR230</text>
+        <text x="140" y="518" text-anchor="middle" style="font-size:10px" id="svSr">emulates N82/1</text>
+        <circle class="led" id="svLed" cx="62" cy="525" r="5"/>
+        <text x="76" y="529" style="font-size:9.5px" id="svLedT">LED</text>
+        <text x="540" y="498" text-anchor="middle" style="font-size:10px">CAN-B to the car</text>
+      </svg>
+      <div class="modehint">
+        <span><i style="background:var(--red)"></i>current drawn from a battery</span>
+        <span><i style="background:var(--green)"></i>charging or supply current</span>
+        <span><i style="background:#353b44"></i>no current</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>CAN-B bus <em id="vBus">asleep</em></h2>
+    <div class="schem">
+      <svg viewBox="0 0 760 250" role="img" aria-label="CAN-B bus with the modules on it, each shown awake or asleep" id="canSvg">
+        <path class="w" id="canLine" d="M30 125H730"/>
+        <text x="32" y="116" class="lab">CAN-B</text>
+        <g id="canMods"></g>
+      </svg>
+      <div class="modehint">
+        <span><i style="background:var(--green)"></i>awake</span>
+        <span><i style="background:#353b44"></i>asleep</span>
+        <span><i style="background:var(--amber)"></i>suspect module</span>
+      </div>
+    </div>
+    <p class="note">Modules wake together when the key goes in and sleep together after the bus has been quiet. Names only: this is a teaching view, not a module map.</p>
+  </section>
+
+  <section class="panel">
+    <h2>DC2DC charger <em>app style</em></h2>
+    <div class="vc" id="vcBox">
+      <div><span>Status</span><b class="st" id="vcSt">WAITING</b></div>
+      <div><span>Charge stage</span><b id="vcStage">&ndash;</b></div>
+      <div><span>Input voltage</span><b id="vcVin">0.0 V</b></div>
+      <div><span>Output voltage</span><b id="vcVout">0.0 V</b></div>
+      <div><span>Input current</span><b id="vcIin">0.0 A</b></div>
+      <div><span>Output current</span><b id="vcIout">0.0 A</b></div>
+      <div><span>Timer</span><b id="vcTim">&ndash;</b></div>
+    </div>
+    <div class="pair">
+      <div>
+        <div class="fld">
+          <label for="rVstart">Start voltage (Vstart) <output id="oVstart">14.0 V</output></label>
+          <input type="range" id="rVstart" min="13" max="14.6" step="0.1" value="14">
+          <small><span class="tag t-vic">SPEC</span> default 14.0 V. The DC2DC charger decides the engine is running when the input stays above this.</small>
+        </div>
+        <div class="fld">
+          <label for="rTstart">Start delay <output id="oTstart">10 s</output></label>
+          <input type="range" id="rTstart" min="5" max="120" step="5" value="10">
+          <small><span class="tag t-user">USER</span> set to 10 s: the engine counts as running once the bus holds Vstart for this long</small>
+        </div>
+        <div class="fld">
+          <label for="rVstop">Shutdown voltage <output id="oVstop">13.1 V</output></label>
+          <input type="range" id="rVstop" min="12.6" max="13.8" step="0.1" value="13.1">
+          <small><span class="tag t-vic">SPEC</span> default 13.1 V. The DC2DC charger stops charging after about 10 seconds below it.</small>
+        </div>
+      </div>
+      <div>
+        <div class="fld">
+          <label for="rLimOut">Output current limit <output id="oLimOut">40 A</output></label>
+          <input type="range" id="rLimOut" min="5" max="50" step="1" value="40">
+          <small><span class="tag t-vic">SPEC</span> 1 to 50 A. The 40 A lead-acid preset is rarely reached: a 35 Ah battery accepts far less.</small>
+        </div>
+        <div class="fld">
+          <label for="rRw">Wiring drop to the DC2DC charger <output id="oRw">0.8 m&Omega;</output></label>
+          <input type="range" id="rRw" min="0" max="8" step="0.2" value="0.8">
+          <small><span class="tag t-model">MODEL</span> bad cabling lowers the voltage the DC2DC charger sees, which can hide the engine.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Settings</h2>
+    <div class="pair">
+      <div>
+        <div class="fld">
+          <label for="rModV">Module power threshold <output id="oModV">10.8 V</output></label>
+          <input type="range" id="rModV" min="10" max="11.5" step="0.1" value="10.8">
+          <small><span class="tag t-user">USER</span> below this the EIS and the other modules have no power, so nothing wakes</small>
+        </div>
+        <div class="fld">
+          <label for="rSleep">Car sleep draw <output id="oSleep">20 mA</output></label>
+          <input type="range" id="rSleep" min="5" max="400" step="5" value="20">
+          <small><span class="tag t-user">USER</span> the car on its own, bus asleep. About 40 mA with the SmartR230 listening, about 20 mA once it is in deep sleep</small>
+        </div>
+        <div class="fld">
+          <label for="rEmuA">SmartR230 draw, awake <output id="oEmuA">60 mA</output></label>
+          <input type="range" id="rEmuA" min="10" max="200" step="5" value="60">
+          <small><span class="tag t-model">MODEL</span> placeholder, to be replaced by a measured value</small>
+        </div>
+        <div class="fld">
+          <label for="rEmuQ">SmartR230 draw, bus quiet <output id="oEmuQ">20 mA</output></label>
+          <input type="range" id="rEmuQ" min="0" max="100" step="1" value="20">
+          <small><span class="tag t-user">USER</span> between the car sleeping and the five-minute timer ending</small>
+        </div>
+        <div class="fld">
+          <label for="rEmuS">SmartR230 draw, deep sleep <output id="oEmuS">1 mA</output></label>
+          <input type="range" id="rEmuS" min="0" max="20" step="1" value="1">
+          <small><span class="tag t-model">MODEL</span> placeholder, to be replaced by a measured value</small>
+        </div>
+      </div>
+      <div>
+        <div class="fld">
+          <label for="rSoc1">Systems battery charge <output id="oSoc1">80%</output></label>
+          <input type="range" id="rSoc1" min="0" max="100" step="1" value="80">
+          <small id="sSoc1">rest voltage 12.6 V</small>
+        </div>
+        <div class="fld">
+          <label for="rSoc4">Starter battery charge <output id="oSoc4">70%</output></label>
+          <input type="range" id="rSoc4" min="0" max="100" step="1" value="70">
+          <small id="sSoc4">rest voltage 12.4 V</small>
+        </div>
+        <div class="pair">
+          <div class="fld"><label for="nCap1">G1 Ah</label><input type="number" id="nCap1" min="20" max="150" value="70"></div>
+          <div class="fld"><label for="nCap4">G1/4 Ah</label><input type="number" id="nCap4" min="20" max="150" value="35"></div>
+        </div>
+        <small style="color:var(--dim)">Same batteries as the factory simulator: 70 Ah AGM and 35 Ah lead-acid. Alternator output is fixed at 14.1 V <span class="tag t-user">USER</span></small>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="demoPanel">
+    <h2>Guided demos <em>about 30 seconds each</em></h2>
+    <div class="demos" id="demoList"></div>
+    <div class="demobar" id="demoBar" hidden>
+      <div class="dt"><span id="demoTitle"></span><button id="bDemoStop">Stop demo</button></div>
+      <p id="demoSay" role="status" aria-live="polite"></p>
+      <div class="bar"><i id="demoProg"></i></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- RIGHT: read -->
+<aside class="col col-r">
+
+  <section class="panel">
+    <h2>Fault injection <em>combine freely</em></h2>
+    <div class="faults" id="faults">
+      <label class="fault"><span>Systems battery weak<small>less capacity, high internal resistance</small></span><input type="checkbox" id="fBad"><i class="sw"></i></label>
+      <label class="fault"><span>Alternator G2 failed<small>no output to the bus</small></span><input type="checkbox" id="fAlt"><i class="sw"></i></label>
+      <label class="fault"><span>Reverse polarity<small>destroys the DC2DC charger, no protection</small></span><input type="checkbox" id="fRev"><i class="sw"></i></label>
+      <label class="fault"><span>F52f2 blown (200 A)<small>alternator cut off from the bus</small></span><input type="checkbox" id="fF2"><i class="sw"></i></label>
+      <label class="fault"><span>DC2DC input fuse blown<small>charger cannot see the bus</small></span><input type="checkbox" id="fIn"><i class="sw"></i></label>
+      <label class="fault"><span>DC2DC output fuse blown<small>charger cannot reach G1/4</small></span><input type="checkbox" id="fOut"><i class="sw"></i></label>
+      <label class="fault"><span>Isolator link fuse blown<small>the 20 A manual link is open</small></span><input type="checkbox" id="fLink"><i class="sw"></i></label>
+    </div>
+    <div class="fld" style="margin-top:12px">
+      <label for="selWake">Wake fault</label>
+      <select id="selWake" class="sel">
+        <option value="none">None</option>
+        <option value="stuck">Stuck awake</option>
+        <option value="loop">Sleep/wake loop</option>
+      </select>
+    </div>
+    <div class="fld">
+      <label for="selSus">Faulty module</label>
+      <select id="selSus" class="sel"></select>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Live readings</h2>
+    <div class="stats">
+      <div class="stat" id="stVb"><small>Bus (G1)</small><b id="rVb">12.6<i>V</i></b></div>
+      <div class="stat" id="stV4"><small>G1/4 (starter)</small><b id="rV4">12.6<i>V</i></b></div>
+      <div class="stat"><small>Load</small><b id="rLoad">0.0<i>A</i></b></div>
+      <div class="stat"><small>Alternator</small><b id="rAlt">0.0<i>A</i></b></div>
+      <div class="stat"><small>G1 current</small><b id="rI1">0.0<i>A</i></b></div>
+      <div class="stat"><small>G1/4 current</small><b id="rI4">0.0<i>A</i></b></div>
+      <div class="stat"><small>DC2DC output</small><b id="rIo">0.0<i>A</i></b></div>
+      <div class="stat"><small>Isolator link</small><b id="rIl">0.0<i>A</i></b></div>
+      <div class="stat span2"><small>Systems battery charge</small><b id="rS1">80%</b><div class="bar" id="bar1"><i></i></div></div>
+      <div class="stat span2"><small>Starter battery charge</small><b id="rS4">70%</b><div class="bar" id="bar4"><i></i></div></div>
+      <div class="stat span2"><small>Last start: G1/4 dip | bus dip</small><b id="rCrank">&ndash;</b></div>
+      <div class="stat span2"><small>Link fuse heat</small><b id="rHeat">&ndash;</b></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Status <em id="vSt">normal</em></h2>
+    <div class="outs">
+      <div><span>DC2DC</span><b id="oOri">waiting</b></div>
+      <div><span>Charge stage</span><b id="oStage">&ndash;</b></div>
+      <div><span>Isolator</span><b id="oIso">open</b></div>
+      <div><span>LINK</span><b id="oLink">fitted</b></div>
+      <div><span>SmartR230</span><b id="oEmu">awake</b></div>
+      <div><span>Wi-Fi</span><b id="oWifi">on</b></div>
+      <div><span>K57 / K75</span><b>unwired</b></div>
+      <div><span>Dash</span><b id="oDash">clean</b></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Fault memory <em>simulator labels</em></h2>
+    <ul class="dtc" id="dtcList"><li class="none">No entries</li></ul>
+    <button id="bClear" style="width:100%">Clear (SDS / DAS)</button>
+    <p class="note">Only a diagnostic tool can clear these. The customer cannot do it from the dash.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Event log</h2>
+    <ul class="log" id="log"></ul>
+    <p class="note"><span class="tag t-vic">SPEC</span> behaviour taken from the charger maker's published figures. <span class="tag t-user">USER</span> values you supplied. <span class="tag t-model">MODEL</span> assumed by the simulator, not verified on a car.</p>
+  </section>
+
+</aside>
+</div>
+
+<footer class="foot">
+  <span>Independent project by SmartR230. Not affiliated with or endorsed by Mercedes-Benz.</span>
+</footer>
+
+</div>
+
+<footer class="site-foot">
+  <p>&copy; 2026 SmartR230. Mercedes-Benz and SL R230 are registered trademarks of Daimler AG.</p>
+  <p>SmartR230 is an independent product and is not affiliated with or endorsed by Mercedes-Benz.</p>
+</footer>
+
+<!-- Script order matters: Core, then Demos, then Device + UI. -->
+<script src="/assets/simulator/dc2dc-core.js" defer></script>
+<script src="/assets/simulator/dc2dc-demos.js" defer></script>
+<script src="/assets/simulator/dc2dc-ui.js" defer></script>
+</body>
+</html>
