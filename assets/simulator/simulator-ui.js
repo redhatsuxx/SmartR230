@@ -20,7 +20,8 @@
 
   let speed = 10, running = true, last = performance.now();
   // M1 (starter motor) display state: flashes red while cranking, then green while the engine runs. Display only; the model starts the engine instantly.
-  const CRANK_MS = 1500; let prevEng = false, crankUntil = 0;
+  const CRANK_MS = 1500; let prevEng = false, crankUntil = 0, crankDip = null;
+  const RECOVER_MS = 600;
   let lastLogN = -1, lastDtc = '';
 
   // Every path is drawn in one direction; `rev` flips the dash animation when current runs the other way.
@@ -108,15 +109,19 @@
     $('k75box').setAttribute('class', 'relay-box' + (S.k75 ? ' on' : ''));
     $('modBox').style.stroke = F.burnt ? 'var(--red)' : S.mod === 'STANDBY' ? '' : '#7a828e';
     $('dcBox').style.stroke = R.dcdc ? 'var(--green)' : '';
-    if (S.eng && !prevEng) crankUntil = performance.now() + CRANK_MS;
+    if (S.eng && !prevEng) { crankUntil = performance.now() + CRANK_MS; crankDip = S.lastCrank; }
     if (!S.eng && prevEng) crankUntil = 0;
     prevEng = S.eng;
-    const cranking = performance.now() < crankUntil;
+    const nowMs = performance.now();
+    const cranking = nowMs < crankUntil;
+    // G1/4 as shown: sags to the model's cranking voltage while M1 turns, then recovers to its normal (or DC/DC charge) voltage.
+    const v4Shown = crankDip === null || nowMs >= crankUntil + RECOVER_MS ? R.V4
+      : cranking ? crankDip : crankDip + (R.V4 - crankDip) * ((nowMs - crankUntil) / RECOVER_MS);
     $('m1c').setAttribute('class', 'box' + (cranking ? ' m1-crank' : S.eng ? ' m1-run' : ''));
     $('svMode').textContent = modeShown;
     $('svTimer').textContent = timerText(S);
     $('svBurnt').textContent = F.burnt ? 'BCM BURNT BOARD' : '';
-    $('sv4v').textContent = R.V4.toFixed(1) + ' V';
+    $('sv4v').textContent = v4Shown.toFixed(1) + ' V';
     $('sv4s').textContent = Math.round(S.soc4 * 100) + '%';
     $('sv1v').textContent = R.V30.toFixed(1) + ' V';
     $('sv1s').textContent = Math.round(S.soc1 * 100) + '%';
@@ -148,7 +153,7 @@
     $('vSpd').textContent = '0';
 
     // readings
-    num($('rT30'), R.V30, 'V'); num($('rV4'), R.V4, 'V');
+    num($('rT30'), R.V30, 'V'); num($('rV4'), v4Shown, 'V');
     $('stT30').className = 'stat' + (R.V30 < cfg.thr ? ' bad' : R.V30 < cfg.thr + 0.5 ? ' warn' : '');
     $('stV4').className = 'stat' + (R.V4 < 11.9 ? ' bad' : R.V4 < 12.2 && !R.dcdc && !R.link && !alt ? ' warn' : '');
     num($('rLoad'), ld.I, 'A', ld.I < 1 ? 2 : 1); num($('rAlt'), alt ? R.Ialt : 0, 'A');
@@ -264,7 +269,14 @@
   /* ---- bindings ---- */
   $('bKeyIn').onclick = () => { act.keyIn(); poke(); };
   $('bKeyOut').onclick = () => { act.keyOut(); poke(); };
-  $('bStart').onclick = () => { crankUntil = performance.now() + CRANK_MS; act.start(); poke(); };
+  $('bStart').onclick = () => {
+    const before = Core.S.lastCrank;
+    act.start();
+    // A failed attempt still sags G1/4 and flashes M1, but only if the model actually cranked (it sets lastCrank before checking the minimum voltage).
+    if (!Core.S.eng) { const cranked = Core.S.lastCrank !== null && Core.S.lastCrank !== before; crankDip = cranked ? Core.S.lastCrank : null; crankUntil = cranked ? performance.now() + CRANK_MS : 0; }
+    else crankUntil = performance.now() + CRANK_MS;
+    poke();
+  };
   $('bStop').onclick = () => { act.stop(); poke(); };
   $('bWake').onclick = () => { act.canWake(); poke(); };
   $('bDemoStop').onclick = () => { stopDemo(); setSpeed(10); };

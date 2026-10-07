@@ -13,8 +13,8 @@ const Core = (function () {
   const K57_HOLD = 300;     // DOC   about 5 minutes
   const MON_WINDOW = 30;    // DOC   30 s wait for a start signal
   const SLEEP_DELAY = 30;   // MODEL time from key out to car asleep
-  const CRANK_A = 180;      // MODEL starter current from G1/4
-  const CRANK_MIN_V = 8.0;  // MODEL below this the starter will not turn
+  const CRANK_A = 100;      // MODEL starter current from G1/4 (was 180; lowered so a healthy start dips to about 11.4 V rather than 10.4 V)
+  const CRANK_MIN_V = 9.8;  // MODEL below this the starter will not turn (was 8.0 at 180 A; moved with the lower cranking current so the flat-battery cut-off, about 34% charge, is unchanged)
   const CRANK_LOAD = 25;    // MODEL extra amps on G1 while cranking (solenoid, injection, ignition)
   const ECU_MIN_V = 9.0;    // MODEL below this the control units brown out
 
