@@ -18,6 +18,7 @@ const flashBtn = document.getElementById("flashBtn");
 const progressBar = document.getElementById("progressBar");
 const logEl = document.getElementById("log");
 const firmwareVersionEl = document.getElementById("firmwareVersion");
+const doneBanner = document.getElementById("doneBanner");
 
 if (firmwareVersionEl) firmwareVersionEl.textContent = FIRMWARE_VERSION;
 
@@ -131,6 +132,7 @@ flashBtn.addEventListener("click", async () => {
 
   connectBtn.disabled = true;
   flashBtn.disabled = true;
+  if (doneBanner) doneBanner.hidden = true;
   setProgress(0);
 
   try {
@@ -172,6 +174,8 @@ flashBtn.addEventListener("click", async () => {
 
     setProgress(100);
     log("Done. The device has been flashed and should now reboot into the new firmware.", "ok");
+    log("It's now safe to remove the device.", "ok");
+    if (doneBanner) doneBanner.hidden = false;
   } catch (err) {
     log(`Flashing failed: ${describeError(err)}`, "err");
   } finally {

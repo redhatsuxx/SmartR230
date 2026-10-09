@@ -247,7 +247,7 @@ button.demo[aria-current="true"] { border-color: var(--red); background: #1c1315
 .schem .led.steady{fill:var(--green);stroke:var(--green)}
 .schem .led.flash{fill:var(--green);stroke:var(--green);animation:ledblink 1s steps(1) infinite}
 @keyframes ledblink{0%{opacity:1}50%{opacity:.12}100%{opacity:1}}
-@media (prefers-reduced-motion:reduce){.ledbig.flash,.schem .led.flash{animation:none}}
+/* The LED blink is the status itself (flashing vs steady), so it keeps its real rate even with reduced motion; it is a small 1 Hz blink, well under the flash-safety threshold. */
 .phone{background:#050506;border:1px solid var(--line);border-radius:18px;padding:8px}
 #devHost{height:600px;overflow:auto;border-radius:12px;background:#0a0a0b}
 .ghost{height:600px;display:grid;place-items:center;text-align:center;padding:24px;color:var(--dim);font-size:13px;border:1px dashed var(--line);border-radius:12px}

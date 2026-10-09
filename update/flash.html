@@ -112,6 +112,17 @@
     transition: width 0.2s ease;
   }
 
+  .done-banner {
+    background: #0f2a1a;
+    border: 1px solid var(--good);
+    border-radius: 8px;
+    color: var(--good);
+    font-weight: 600;
+    text-align: center;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
   .log {
     background: #000;
     border: 1px solid var(--border);
@@ -185,6 +196,8 @@
 <div class="progress-wrap">
   <div class="progress-bar" id="progressBar"></div>
 </div>
+
+<div class="done-banner" id="doneBanner" role="status" hidden>It's now safe to remove the device.</div>
 
 <div class="log" id="log"></div>
 
