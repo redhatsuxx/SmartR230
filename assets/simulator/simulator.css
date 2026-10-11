@@ -214,3 +214,7 @@ button.demo[aria-current="true"] { border-color: var(--red); background: #1c1315
 
 /* fix: the demo bar showed empty before any demo ran, because display:grid overrode the hidden attribute (present in the original page) */
 .demobar[hidden] { display: none; }
+
+/* Buy button in the top links */
+.site-nav a.nav-buy { background: #e63946; color: #fff; padding: 7px 16px; border-radius: 6px; }
+.site-nav a.nav-buy:hover { background: #ff4d5a; color: #fff; }

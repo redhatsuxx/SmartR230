@@ -343,6 +343,9 @@ nav {
 }
 
 nav a {
+    white-space: nowrap;
+    display: inline-block;
+    margin-bottom: 4px;
     color: #d0d0d0;
     text-decoration: none;
     font-weight: 600;
@@ -354,6 +357,19 @@ nav a {
 nav a:hover,
 nav a.active {
     color: #e63946;
+}
+
+/* Buy button in the top links - added 2026-10-11 */
+nav a.nav-buy {
+    background: #e63946;
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 6px;
+}
+
+nav a.nav-buy:hover {
+    background: #ff4d5a;
+    color: #fff;
 }
 
 footer {

@@ -278,3 +278,7 @@ button.demo[aria-current="true"] { border-color: var(--red); background: #1c1315
 .site-foot { margin: 24px -16px 0; margin-bottom: -32px; background: #0a0a0a; border-top: 1px solid #333; padding: 30px 20px; text-align: center; color: #808080; font-size: 14px; }
 .site-foot p { margin: 0 0 8px; }
 .site-foot p:last-child { margin-bottom: 0; }
+
+/* Buy button in the top links */
+.site-nav a.nav-buy { background: #e63946; color: #fff; padding: 7px 16px; border-radius: 6px; }
+.site-nav a.nav-buy:hover { background: #ff4d5a; color: #fff; }
